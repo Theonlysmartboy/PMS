@@ -1,7 +1,7 @@
 <?php
 define('CURRENCY', '$');
-define('WEB_URL', 'http://127.0.0.1/ams/');
-define('ROOT_PATH', 'C:/wamp64/www/ams/');
+define('WEB_URL', 'http://127.0.0.1/Pms/');
+define('ROOT_PATH', 'C:/wamp64/www/Pms/');
 
 
 define('DB_HOSTNAME', '127.0.0.1');
