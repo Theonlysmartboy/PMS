@@ -54,7 +54,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <link href="<?php echo WEB_URL; ?>dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. Choose a skin from the css/skins 
  folder instead of downloading all of them to reduce the load. -->
-<link href="<?php echo WEB_URL; ?>dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo WEB_URL; ?>dist/css/skins/skin-purple.min.css" rel="stylesheet" type="text/css" />
 <!-- iCheck for checkboxes and radio inputs -->
 <link href="<?php echo WEB_URL; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo WEB_URL; ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
@@ -71,7 +71,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-blue sidebar-mini">
+<body class="skin-purple sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 <header class="main-header">
