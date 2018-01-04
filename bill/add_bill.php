@@ -26,7 +26,7 @@ $hdnid="0";
 if(isset($_POST['ddlBillType'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 		$sql = "INSERT INTO tbl_add_bill(bill_type,bill_date,bill_month,bill_year,total_amount,deposit_bank_name,bill_details,branch_id) values('$_POST[ddlBillType]','$_POST[txtBillDate]','$_POST[ddlBillMonth]','$_POST[ddlBillYear]','$_POST[txtTotalAmount]','$_POST[txtDepositBankName]','$_POST[txtBillDetails]','" . $_SESSION['objLogin']['branch_id'] . "')";
-		mysql_query($sql,$link);
+		mysqli_query($link,$sql);
 		//mysql_close($link);
 		$url = WEB_URL . 'bill/bill_list.php?m=add';
 		header("Location: $url");
@@ -34,7 +34,7 @@ if(isset($_POST['ddlBillType'])){
 	}
 	else{
 		$sql = "UPDATE `tbl_add_bill` SET `bill_type`='".$_POST['ddlBillType']."',`bill_date`='".$_POST['txtBillDate']."',`bill_month`='".$_POST['ddlBillMonth']."',`bill_year`='".$_POST['ddlBillYear']."',`total_amount`='".$_POST['txtTotalAmount']."',`deposit_bank_name`='".$_POST['txtDepositBankName']."',`bill_details`='".$_POST['txtBillDetails']."' WHERE bill_id='".$_GET['id']."'";
-		mysql_query($sql,$link);
+		mysqli_query($link,$sql);
 		//mysql_close($link);
 		$url = WEB_URL . 'bill/bill_list.php?m=up';
 		header("Location: $url");
@@ -44,8 +44,8 @@ if(isset($_POST['ddlBillType'])){
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_bill where bill_id = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_add_bill where bill_id = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		$bill_type = $row['bill_type'];
 		$bill_date = $row['bill_date'];
 		$bill_month = $row['bill_month'];
