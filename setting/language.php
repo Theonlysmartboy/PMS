@@ -16,13 +16,15 @@ $msg = '';
 
 if(isset($_POST['ddlLanguage'])){
 	$sqlx = "DELETE FROM `tbl_settings`";
-	mysql_query($sqlx,$link);
+	mysqli_query($link,$sqlx);
 	$sql = "INSERT INTO tbl_settings(`lang_code`,`currency`,`currency_seperator`,`currency_position`) values('$_POST[ddlLanguage]','$_POST[ddlCurrency]','$_POST[ddlCurrencySeparator]','$_POST[ddlCurrencyPosition]')";
-	mysql_query($sql,$link);
+	if(!mysqli_query($link,$sql)){
+            echo mysqli_error($link);
+        };
 	//mysql_close($link);
 }
-	$query = mysql_query("SELECT * FROM tbl_settings",$link);
-	while($row = mysql_fetch_array($query)){
+	$query = mysqli_query($link,"SELECT * FROM tbl_settings");
+	while($row = mysqli_fetch_array($query)){
 		$lang_code = $row['lang_code'];
 		$currency = $row['currency'];
 		$currency_seperator = $row['currency_seperator'];
@@ -82,6 +84,7 @@ if(isset($_POST['ddlLanguage'])){
               <option value="">--Select--</option>
               <option <?php if($currency == "$"){echo 'selected';}?> value="$">Doller</option>
               <option <?php if($currency == "Tk"){echo 'selected';}?> value="Tk">Taka</option>
+               <option <?php if($currency == "Ksh"){echo 'selected';}?> value="Ksh">Kenya Shillings</option>
             </select>
           </div>
           <div class="form-group">
