@@ -6,7 +6,7 @@ if(!isset($_SESSION['objLogin'])){
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1> Sako Settings <small>Control Panel</small> </h1>
+  <h1> PMS Settings <small>Control Panel</small> </h1>
   <ol class="breadcrumb">
     <li><a href="<?php echo WEB_URL; ?>dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
     <li class="active"><a href="<?php echo WEB_URL; ?>setting/setting.php">Settings</a></li>
@@ -20,7 +20,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>Bill Setup</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/fair.png"></a> </div>
@@ -31,7 +31,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>Employee Salary</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/fund.png"></a> </div>
@@ -43,7 +43,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>Member Type</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/owner.png"></a> </div>
@@ -55,7 +55,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>Month Setup</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/report.png"></a> </div>
@@ -67,7 +67,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>Year Setup</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/report.png"></a> </div>
@@ -79,7 +79,7 @@ if(!isset($_SESSION['objLogin'])){
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>SAKO</h3>
+          <h3>PMS</h3>
           <p>System Setup</p>
         </div>
         <div class="icon dashboard_image"> <img height="80" width="80" src="<?php echo WEB_URL; ?>img/report.png"></a> </div>
