@@ -88,7 +88,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['delid']) && $_GET['delid'] != '' && $_GET['delid'] > 0){
 		$sqlx= "DELETE FROM `tbl_add_bill_type` WHERE bt_id = ".$_GET['delid'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($link,$sqlx); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -128,8 +128,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                 </thead>
                 <tbody>
                   <?php
-				$result = mysql_query("SELECT * FROM tbl_add_bill_type order by bt_id ASC ",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"SELECT * FROM tbl_add_bill_type order by bt_id ASC ");
+				while($row = mysqli_fetch_array($result)){?>
                   <tr>
 					<td><?php echo $row['bill_type']; ?></td>
                     <td><a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onclick="$('#employee_view_<?php echo $row['bt_id']; ?>').modal('show');" data-original-title="<?php echo $_data['view_text'];?>"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL;?>setting/bill_setup.php?spid=<?php echo $row['bt_id']; ?>" data-original-title="<?php echo $_data['edit_text'];?>"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onclick="deleteBillType(<?php echo $row['bt_id']; ?>);" href="javascript:;" data-original-title="<?php echo $_data['delete_text'];?>"><i class="fa fa-trash-o"></i></a>
@@ -155,7 +155,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                         </div>
                       </div></td>
                   </tr>
-                  <?php } mysql_close($link); ?>
+                  <?php } mysqli_close($link); ?>
                 </tbody>
               </table>
             </div>

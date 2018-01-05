@@ -1,6 +1,8 @@
 <footer class="main-footer">
-  <div class="pull-right hidden-xs"> <b>Version</b> 1.1 </div>
-  <strong>Copyright &copy; 2014-2016 <a href="vidic.co.ke" target="_blank">Vidic</a></strong> </footer>
+    <div class="pull-right hidden-xs"> <strong>Powered by:</strong><a href="">OTEMA<sup>TM</sup></a><b>Version</b> 1.1 </div>
+  <strong>Copyright &copy; <script>var d = new Date();
+                var n = d.getFullYear();
+                document.write(n);</script><a href="vidic.co.ke" target="_blank">Vidic</a></strong> </footer>
 <!-- /.control-sidebar -->
 <div class='control-sidebar-bg'></div>
 </div>
@@ -26,5 +28,6 @@
 <script src="<?php echo WEB_URL; ?>dist/js/dataTables.responsive.min.js" type="text/javascript"></script>
 <script src="<?php echo WEB_URL; ?>dist/js/dataTables.tableTools.min.js" type="text/javascript"></script>
 <script src="<?php echo WEB_URL; ?>plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="<?php echo WEB_URL; ?>assets/alertify/lib/alertify.min.js"></script>
 <input type="hidden" id="web_url" value="<?php echo WEB_URL; ?>" />
 </body></html>

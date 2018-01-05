@@ -23,16 +23,16 @@ if(isset($_POST['txtGasBill'])){
 	$sql="INSERT INTO `tbl_add_utility_bill`(`gas_bill`,`security_bill`) VALUES ('$_POST[txtGasBill]','$_POST[txtSecurityBill]')";	
 			//echo $sql;
 			//die();
-			mysql_query($sql, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/utility_bill_setup.php?m=add';
 		    header("Location: $url");
 		}
 else{
 	
 	$sql_update="UPDATE `tbl_add_utility_bill` set gas_bill = '$_POST[txtGasBill]',`security_bill`='".$_POST['txtSecurityBill']."' where utility_id= '" . (int)$_POST['hdnSpid'] . "'";	
-			mysql_query($sql_update, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql_update);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/utility_bill_setup.php?m=up';
 		    header("Location: $url");
 			/*echo "<script>alert('Update Successfully');</script>";*/
@@ -42,8 +42,8 @@ $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysql_query("SELECT * FROM tbl_add_utility_bill where utility_id= '" . (int)$_GET['spid'] . "'",$link);
-		if($row = mysql_fetch_array($result_location)){
+		$result_location = mysql_query($link,"SELECT * FROM tbl_add_utility_bill where utility_id= '" . (int)$_GET['spid'] . "'");
+		if($row = mysqli_fetch_array($result_location)){
 		 	$gas_bill = $row['gas_bill'];
 			$security_bill = $row['security_bill'];
 			$button_text = $_data['update_button_text'];
@@ -80,14 +80,18 @@ if(isset($_GET['spid']) && $_GET['spid'] != ''){
             <label for="txtGasBill"><?php echo $_data['text_3'];?> :</label>
             <div class="input-group">
             <input type="text" name="txtGasBill" value="<?php echo $gas_bill;?>" id="txtGasBill" class="form-control" />
-            <div class="input-group-addon"><?php echo CURRENCY;?></div>
+            <?php 
+            $currency_val = mysqli_fetch_array(mysqli_query($link,"SELECT currency FROM tbl_settings"));
+            
+            ?>
+            <div class="input-group-addon"><?php echo $currency_val['currency'];?></div>
             </div>
           </div>
            <div class="form-group">
             <label for="txtSecurityBill"><?php echo $_data['text_4'];?> :</label>
             <div class="input-group">
             <input type="text" name="txtSecurityBill" value="<?php echo $security_bill;?>" id="txtSecurityBill" class="form-control" />
-            <div class="input-group-addon"><?php echo CURRENCY;?></div>
+            <div class="input-group-addon"><?php echo $currency_val['currency'];?></div>
             </div>
           </div>
           <div class="form-group pull-right">
@@ -106,7 +110,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['delid']) && $_GET['delid'] != '' && $_GET['delid'] > 0){
 		$sqlx= "DELETE FROM `tbl_add_utility_bill` WHERE utility_id = ".$_GET['delid'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($link,$sqlx); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -147,8 +151,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                 </thead>
                 <tbody>
                   <?php
-				$result = mysql_query("SELECT * FROM tbl_add_utility_bill order by utility_id ASC ",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"SELECT * FROM tbl_add_utility_bill order by utility_id ASC ");
+				while($row = mysqli_fetch_array($result)){?>
                   <tr>
 					<?php if($currency_position == 'left') { ?>
                     <td><?php echo $global_currency.$row['gas_bill']; ?></td>
@@ -185,7 +189,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                         </div>
                       </div></td>
                   </tr>
-                  <?php } mysql_close($link); ?>
+                  <?php } mysqli_close($link); ?>
                 </tbody>
               </table>
             </div>

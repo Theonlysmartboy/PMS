@@ -65,6 +65,10 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <!-- jQuery 2.1.4 -->
 <script src="<?php echo WEB_URL; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="<?php echo WEB_URL; ?>dist/js/printThis.js"></script>
+<!-- alertify core styles -->
+<link rel="stylesheet" href="<?php echo WEB_URL; ?>assets/alertify/themes/alertify.core.css" />
+<!-- alertify theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<?php echo WEB_URL; ?>assets/alertify/themes/alertify.default.css" />
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

@@ -21,27 +21,26 @@ if(isset($_POST['txtMemberType'])){
 	$sql="INSERT INTO `tbl_add_member_type`(`member_type`) VALUES ('$_POST[txtMemberType]')";	
 			//echo $sql;
 			//die();
-			mysql_query($sql, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/member_type_setup.php?m=add';
 		    header("Location: $url");
 		}
 else{
 	
 	$sql_update="UPDATE `tbl_add_member_type` set member_type = '$_POST[txtMemberType]' where member_id= '" . (int)$_POST['hdnSpid'] . "'";	
-			mysql_query($sql_update, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql_update);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/member_type_setup.php?m=up';
 		    header("Location: $url");
-			/*echo "<script>alert('Update Successfully');</script>";*/
-		}
+					}
 
 $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysql_query("SELECT * FROM tbl_add_member_type where member_id= '" . (int)$_GET['spid'] . "'",$link);
-		if($row = mysql_fetch_array($result_location)){
+		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_member_type where member_id= '" . (int)$_GET['spid'] . "'");
+		if($row = mysqli_fetch_array($result_location)){
 		 	$member_type = $row['member_type'];
 			$button_text = $_data['update_button_text'];
 			$form_url = WEB_URL . "setting/member_type_setup.php?id=".$_GET['spid'];
@@ -93,7 +92,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['delid']) && $_GET['delid'] != '' && $_GET['delid'] > 0){
 		$sqlx= "DELETE FROM `tbl_add_member_type` WHERE member_id = ".$_GET['delid'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($link,$sqlx); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -133,8 +132,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                 </thead>
                 <tbody>
                   <?php
-				$result = mysql_query("SELECT * FROM tbl_add_member_type order by member_id ASC ",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"SELECT * FROM tbl_add_member_type order by member_id ASC ");
+				while($row = mysqli_fetch_array($result)){?>
                   <tr>
 					<td><?php echo $row['member_type']; ?></td>
                     <td><a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onclick="$('#employee_view_<?php echo $row['member_id']; ?>').modal('show');" data-original-title="<?php echo $_data['view_text'];?>"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL;?>setting/member_type_setup.php?spid=<?php echo $row['member_id']; ?>" data-original-title="<?php echo $_data['edit_text'];?>"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onclick="deleteMemberType(<?php echo $row['member_id']; ?>);" href="javascript:;" data-original-title="<?php echo $_data['delete_text'];?>"><i class="fa fa-trash-o"></i></a>
@@ -160,7 +159,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                         </div>
                       </div></td>
                   </tr>
-                  <?php } mysql_close($link); ?>
+                  <?php } mysqli_close($link); ?>
                 </tbody>
               </table>
             </div>
