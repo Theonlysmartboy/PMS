@@ -9,8 +9,8 @@ if(!isset($_SESSION['objLogin'])){
 
 $mysalery = 0;
 //unit count for owner
-$result_amount = mysql_query("SELECT sum(amount) as total FROM  tbl_add_employee_salary_setup where emp_name =".(int)$_SESSION['objLogin']['eid'],$link);
-if($row_amount_total = mysql_fetch_array($result_amount)){
+$result_amount = mysqli_query($link,"SELECT sum(amount) as total FROM  tbl_add_employee_salary_setup where emp_name =".(int)$_SESSION['objLogin']['eid']);
+if($row_amount_total = mysqli_fetch_array($result_amount)){
 	$total_amount = $row_amount_total['total'];
 }
 ?>

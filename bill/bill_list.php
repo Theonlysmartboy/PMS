@@ -10,7 +10,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_bill` WHERE bill_id = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -67,8 +67,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("Select *,bt.bill_type as bt_type,m.month_name,y.xyear,bt.bt_id from tbl_add_bill b inner join tbl_add_bill_type bt on bt.bt_id = b.bill_type inner join tbl_add_month_setup m on m.m_id = b.bill_month inner join tbl_add_year_setup y on y.y_id = b.bill_year where b.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by b.bill_id asc",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"Select *,bt.bill_type as bt_type,m.month_name,y.xyear,bt.bt_id from tbl_add_bill b inner join tbl_add_bill_type bt on bt.bt_id = b.bill_type inner join tbl_add_month_setup m on m.m_id = b.bill_month inner join tbl_add_year_setup y on y.y_id = b.bill_year where b.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by b.bill_id asc");
+				while($row = mysqli_fetch_array($result)){?>
             <tr>
               <td><?php echo $row['bt_type']; ?></td>
               <td><?php echo $row['bill_date']; ?></td>
@@ -111,7 +111,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

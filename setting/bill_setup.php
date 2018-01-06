@@ -16,27 +16,26 @@ if(isset($_POST['txtBillType'])){
 		if($_POST['hdnSpid'] == '0'){
 		
 	$sql="INSERT INTO `tbl_add_bill_type`(`bill_type`) VALUES ('$_POST[txtBillType]')";	
-			mysql_query($sql, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/bill_setup.php?m=add';
 		    header("Location: $url");
 		}
 else{
 	
 	$sql_update="UPDATE `tbl_add_bill_type` set bill_type = '$_POST[txtBillType]' where bt_id= '" . (int)$_POST['hdnSpid'] . "'";	
-			mysql_query($sql_update, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql_update);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/bill_setup.php?m=up';
 		    header("Location: $url");
-			/*echo "<script>alert('Update Successfully');</script>";*/
-		}
+					}
 
 $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysql_query("SELECT * FROM tbl_add_bill_type where bt_id= '" . (int)$_GET['spid'] . "'",$link);
-		if($row = mysql_fetch_array($result_location)){
+		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_bill_type where bt_id= '" . (int)$_GET['spid'] . "'");
+		if($row = mysqli_fetch_array($result_location)){
 		 	$bill_type = $row['bill_type'];
 			$button_text = $_data['update_button_text'];
 			$form_url = WEB_URL . "setting/bill_setup.php?id=".$_GET['spid'];

@@ -11,31 +11,31 @@ if(isset($_POST['username']) && $_POST['username'] != ''){
 	$password = '';
 	if($_POST['ddlLoginType'] == '1'){
 		//here for admin
-		$sql= mysql_query("SELECT * FROM tbl_add_admin WHERE email = '".make_safe($_POST['username'])."'",$link);
+		$sql= mysqli_query($link,"SELECT * FROM tbl_add_admin WHERE email = '".make_safe($_POST['username'])."'");
 		$password = 'password';
 	}
 	else if($_POST['ddlLoginType'] == '2'){
 		//here for teacher
-		$sql= mysql_query("SELECT * FROM tbl_add_owner WHERE o_email = '".make_safe($_POST['username'])."'",$link);
+		$sql= mysql_query($link,"SELECT * FROM tbl_add_owner WHERE o_email = '".make_safe($_POST['username'])."'");
 		$password = 'o_password';
 	}
 	else if($_POST['ddlLoginType'] == '3'){
 		//here for student
-		$sql= mysql_query("SELECT * FROM tbl_add_employee WHERE e_email = '".make_safe($_POST['username'])."'",$link);
+		$sql= mysql_query($link,"SELECT * FROM tbl_add_employee WHERE e_email = '".make_safe($_POST['username'])."'");
 		$password = 'e_password';
 	}
 	else if($_POST['ddlLoginType'] == '4'){
 		//here for parent
-		$sql= mysql_query("SELECT * FROM tbl_add_rent WHERE r_email = '".make_safe($_POST['username'])."'",$link);
+		$sql= mysqli_query($link,"SELECT * FROM tbl_add_rent WHERE r_email = '".make_safe($_POST['username'])."'");
 		$password = 'r_password';
 	}
-	if($row = mysql_fetch_array($sql)){
+	if($row = mysqli_fetch_array($sql)){
 		//here success
 		$xMsg = 'Check your Email Address for login details';
 		$msg = 'block';
 		//now send and email to user
-		$result_s_arr = mysql_query("Select * from tbl_add_admin",$link);
-		if($row_arr = mysql_fetch_array($result_s_arr)){
+		$result_s_arr = mysqli_query($link,"Select * from tbl_add_admin");
+		if($row_arr = mysqli_fetch_array($result_s_arr)){
 			$to = trim($_POST['username']);
 			$subject = $row_arr['email'] . ' User Login Details';
 			$headers = "From: " . strip_tags($row_arr['email']) . "\r\n";
@@ -58,7 +58,7 @@ if(isset($_POST['username']) && $_POST['username'] != ''){
 }
 function make_safe($variable) 
 {
-   $variable = strip_tags(mysql_real_escape_string(trim($variable)));
+   $variable = strip_tags(mysqli_real_escape_string(trim($variable)));
    return $variable; 
 }
 ?>

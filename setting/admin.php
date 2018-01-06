@@ -16,15 +16,15 @@ if(!isset($_SESSION['objLogin'])){
 	if(isset($_POST['txtAdminName'])){
 		if($_POST['hdnSpid'] == '0'){		
 			$sql="INSERT INTO `tbl_add_admin`(`name`,`email`,`password`,`branch_id`) VALUES ('$_POST[txtAdminName]','$_POST[txtAdminEmail]','$_POST[txtAdminPassword]','$_POST[ddlBranch]')";	
-			mysql_query($sql, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/admin.php?m=add';
 		    header("Location: $url");
 		}
 		else{		
 			$sql_update="UPDATE `tbl_add_admin` set name = '".$_POST['txtAdminName']."',email = '".$_POST['txtAdminEmail']."',password = '".$_POST['txtAdminPassword']."',branch_id = '".$_POST['ddlBranch']."' where aid= '" . (int)$_POST['hdnSpid'] . "'";	
-			mysql_query($sql_update, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql_update);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/admin.php?m=up';
 		    header("Location: $url");
 			/*echo "<script>alert('Update Successfully');</script>";*/
@@ -32,9 +32,9 @@ if(!isset($_SESSION['objLogin'])){
 	}
 	
 	if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result = mysql_query("SELECT *,a.added_date as p_added_date,b.branch_name from tbl_add_admin a inner join tblbranch b on b.branch_id = a.branch_id where a.aid= '" . (int)$_GET['spid'] . "'",$link);
+		$result = mysqli_query($link,"SELECT *,a.added_date as p_added_date,b.branch_name from tbl_add_admin a inner join tblbranch b on b.branch_id = a.branch_id where a.aid= '" . (int)$_GET['spid'] . "'");
 		
-		if($row = mysql_fetch_array($result)){
+		if($row = mysqli_fetch_array($result)){
 		 	$name = $row['name'];
 			$email = $row['email'];
 			$password = $row['password'];
@@ -87,8 +87,8 @@ if(!isset($_SESSION['objLogin'])){
             <select name="ddlBranch" id="ddlBranch" class="form-control">
               <option value="">--Select--</option>
               <?php
-						$result_page = mysql_query("SELECT * FROM tblbranch order by branch_name ASC" );
-						while($row_page = mysql_fetch_array($result_page)){
+						$result_page = mysqli_query($link,"SELECT * FROM tblbranch order by branch_name ASC" );
+						while($row_page = mysqli_fetch_array($result_page)){
 							if($branch_id  == $row_page['branch_id']){
 								echo '<option selected="selected" value="'.$row_page['branch_id'].'">'.$row_page['branch_name'].'</option>';
 							}
@@ -116,7 +116,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['delid']) && $_GET['delid'] != '' && $_GET['delid'] > 0){
 		$sqlx= "DELETE FROM `tbl_add_admin` WHERE aid = ".$_GET['delid'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($link,$sqlx); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -158,8 +158,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                 </thead>
                 <tbody>
                   <?php
-				$result = mysql_query("SELECT *,a.added_date as p_addted_date,b.branch_name from tbl_add_admin a inner join tblbranch b on b.branch_id = a.branch_id order by a.aid DESC",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT *,a.added_date as p_addted_date,b.branch_name from tbl_add_admin a inner join tblbranch b on b.branch_id = a.branch_id order by a.aid DESC");
+				while($row = mysqli_fetch_array($result)){
 					$phpdate = strtotime( $row['p_addted_date'] );
                  	$date = date( 'd/m/Y H:i:s', $phpdate ); ?>
                   <tr>
@@ -193,7 +193,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                         </div>
                       </div></td>
                   </tr>
-                  <?php } mysql_close($link); ?>
+                  <?php } mysqli_close($link); ?>
                 </tbody>
                 <tfoot>
                   <tr>
