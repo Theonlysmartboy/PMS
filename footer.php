@@ -1,8 +1,8 @@
 <footer class="main-footer">
-    <div class="pull-right hidden-xs"> <strong>Powered by:</strong><a href="">OTEMA<sup>TM</sup></a><b>Version</b> 1.1 </div>
+    <div class="pull-right hidden-xs"> <strong>Powered by:<a href="https://www.facebook.com/otelmaltd/" target="_blank">&nbsp;&nbsp;OTEMA</a><sup>TM</sup></strong><b>&nbsp;&nbsp;&nbsp;Version</b> 1.1 </div>
   <strong>Copyright &copy; <script>var d = new Date();
                 var n = d.getFullYear();
-                document.write(n);</script><a href="vidic.co.ke" target="_blank">Vidic</a></strong> </footer>
+                document.write(n);</script><a href="http://vidic.co.ke/" target="_blank">&nbsp;Vidic</a></strong> </footer>
 <!-- /.control-sidebar -->
 <div class='control-sidebar-bg'></div>
 </div>
