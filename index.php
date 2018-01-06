@@ -93,7 +93,9 @@ function make_safe($variable) {
             <br/>
             <div class="row text-center ">
                 <div class="col-md-12"><br/>
-                    <span style="font-size:35px;font-weight:bold;color:red;">OPTIMUM</span> <span style="font-size:18px;">Apartment Management System</span></div>
+                    <span>
+                        <img src="assets/img/vidiclogo.png" alt="VIDIC" style="height:150px; width: 150px;"/>
+                    </span> <span style="font-size:20px;">Property Management System</span></div>
             </div>
             <br/>
             <div class="row ">
