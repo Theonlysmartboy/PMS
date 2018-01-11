@@ -36,8 +36,8 @@ if(isset($_POST['txtMCName'])){
 		$mc_status = 1;
 	}
 	$sql = "INSERT INTO tbl_add_management_committee(mc_name,mc_email, mc_contact, mc_pre_address,mc_per_address,mc_nid,member_type,mc_joining_date,mc_ending_date,mc_password,mc_status,image,branch_id) values('$_POST[txtMCName]','$_POST[txtMCEmail]','$_POST[txtMCContact]','$_POST[txtMCPreAddress]','$_POST[txtMCPerAddress]','$_POST[txtMCNID]','$_POST[ddlMemberType]','$_POST[txtMCJoiningDate]','$_POST[txtMCEndingDate]','$mc_password','$mc_status','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($sql,$link);
+	mysqli_close($link);
 	$url = WEB_URL . 'management/m_committee_list.php?m=add';
 	header("Location: $url");
 	
@@ -51,8 +51,8 @@ else{
 		$mc_status = 1;
 	}
 	$sql = "UPDATE `tbl_add_management_committee` SET `mc_name`='".$_POST['txtMCName']."',`mc_email`='".$_POST['txtMCEmail']."',`mc_contact`='".$_POST['txtMCContact']."',`mc_pre_address`='".$_POST['txtMCPreAddress']."',`mc_per_address`='".$_POST['txtMCPerAddress']."',`mc_nid`='".$_POST['txtMCNID']."',`member_type`='".$_POST['ddlMemberType']."',`mc_joining_date`='".$_POST['txtMCJoiningDate']."',`mc_ending_date`='".$_POST['txtMCEndingDate']."',`mc_status`='".$mc_status."',`image`='".$image_url."' WHERE mc_id='".$_GET['id']."'";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'management/m_committee_list.php?m=up';
 	header("Location: $url");
 }
@@ -61,8 +61,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_management_committee where mc_id = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link, "SELECT * FROM tbl_add_management_committee where mc_id = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$mc_name = $row['mc_name'];
 		$mc_email = $row['mc_email'];
@@ -84,7 +84,7 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$successful_msg="Update Management Committee Member Successfully";
 		$form_url = WEB_URL . "management/add_m_committee.php?id=".$_GET['id'];
 	}
-	//mysql_close($link);
+	//mysqli_close($link);
 
 }
 //for image upload

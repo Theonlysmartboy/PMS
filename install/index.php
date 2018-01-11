@@ -1,12 +1,13 @@
 <?php
+//system installation file
 define('DIR_APPLICATION', str_replace('\'', '/', realpath(dirname(__FILE__))) . '/');
-define('DIR_SMS', str_replace('\'', '/', realpath(DIR_APPLICATION . '../')) . '/');
+define('DIR_PMS', str_replace('\'', '/', realpath(DIR_APPLICATION . '../')) . '/');
 $success_token = '';
 $base_url = home_base_url();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$options = array(
 		'server'		=> $base_url,
-		'root'			=> DIR_SMS,
+		'root'			=> DIR_PMS,
 		'db_host'		=> trim($_POST['txtHostName']),
 		'db_user'		=> trim($_POST['txtDBUserName']),
 		'db_password'	=> trim($_POST['txtPassword']),
@@ -14,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	);
 	if(importDatabase(trim($_POST['txtHostName']),trim($_POST['txtDBName']),trim($_POST['txtDBUserName']),trim($_POST['txtPassword']))){
 		write_config_files($options);
-		$success_token = 'SAKO APARTMENT MANAGEMENT SYSTEM SETUP SUCCESSFULLY <br/><a href="'.$base_url.'">Go to Website</a>';
+		$success_token = 'PROPERTY MANAGEMENT SYSTEM SETUP SUCCESSFULL <br/><a href="'.$base_url.'">Go to Website</a>';
 	}
 	else{
 		$success_token = 'Error Occured Please Enter Valid Database Access Information !!!!!';
@@ -33,7 +34,7 @@ function importDatabase($mysql_host,$mysql_database,$mysql_user,$mysql_password)
 
 function write_config_files($options) {
 	$output  = '<?php' . "\n";
-	$output .= 'define(\'CURRENCY\', \'$\');' . "\n";
+	$output .= 'define(\'CURRENCY\', \'Ksh\');' . "\n";
 	$output .= 'define(\'WEB_URL\', \'' . $options['server'] . '\');' . "\n";
 	$output .= 'define(\'ROOT_PATH\', \'' . $options['root'] . '\');' . "\n\n\n";
 	

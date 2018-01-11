@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_maintenance_cost` WHERE mcid = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link, $sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -66,8 +66,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
         <?php
-				$result = mysql_query("Select * from tbl_add_maintenance_cost where branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by mcid desc",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link, "Select * from tbl_add_maintenance_cost where branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by mcid desc");
+				while($row = mysqli_fetch_array($result)){?>
             <tr>
             <td><?php echo $row['m_title']; ?></td>
             <td><?php echo $row['m_date']; ?></td>
@@ -108,7 +108,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
             </div>
             </td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

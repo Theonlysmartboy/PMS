@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 		$sqlx= "DELETE FROM `tblbranch` WHERE branch_id = ".$_GET['id'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($link,$sqlx); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -65,8 +65,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-          	$result = mysql_query("Select * from tblbranch order by branch_id desc",$link);
-				while($row = mysql_fetch_array($result)){ ?>
+          	$result = mysqli_query($link,"Select * from tblbranch order by branch_id desc");
+				while($row = mysqli_fetch_array($result)){ ?>
             <tr>
               <td><?php echo $row['branch_name']; ?></td>
               <td><?php echo $row['b_email']; ?></td>
@@ -98,7 +98,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

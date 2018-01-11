@@ -7,8 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 	die();
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_employee_e_all_info.php');
@@ -74,8 +74,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
         	<?php
 				/*print_r($_SESSION['objLogin']);
 				die();*/
-				$result = mysql_query("Select *,m.month_name from tbl_add_employee_salary_setup es inner join tbl_add_month_setup m on m.m_id = es.month_id where es.emp_name = '". (int)$_SESSION['objLogin']['eid'] . "' and es.month_id='".$_GET['mid']."' and es.xyear='".$_GET['yid']."' order by es.emp_id desc",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"Select *,m.month_name from tbl_add_employee_salary_setup es inner join tbl_add_month_setup m on m.m_id = es.month_id where es.emp_name = '". (int)$_SESSION['objLogin']['eid'] . "' and es.month_id='".$_GET['mid']."' and es.xyear='".$_GET['yid']."' order by es.emp_id desc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 			if(file_exists(ROOT_PATH . '/img/upload/' . $_SESSION['objLogin']['image']) && $_SESSION['objLogin']['image'] != ''){
 				$image = WEB_URL . 'img/upload/' . $_SESSION['objLogin']['image'];
@@ -87,7 +87,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
             <td><?php echo $row['xyear']; ?></td>
             <td><?php echo $row['amount'].' '.CURRENCY; ?></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
               <tfoot>
                 <tr>

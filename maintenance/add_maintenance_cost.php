@@ -26,8 +26,8 @@ if(isset($_POST['txtMTitle'])){
 	$sql = "INSERT INTO tbl_add_maintenance_cost(m_title, m_date, xmonth, xyear, m_amount, m_details,branch_id) values('$_POST[txtMTitle]','$_POST[txtMDate]','$_POST[ddlMonth]','$_POST[ddlYear]','$_POST[txtMAmount]','$_POST[txtMDetails]','" . $_SESSION['objLogin']['branch_id'] . "')";
 	//echo $sql;
 	//die();
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'maintenance/maintenance_cost_list.php?m=add';
 	header("Location: $url");
 	
@@ -35,7 +35,7 @@ if(isset($_POST['txtMTitle'])){
 else{
 	
 	$sql = "UPDATE `tbl_add_maintenance_cost` SET `m_title`='".$_POST['txtMTitle']."',`m_date`='".$_POST['txtMDate']."',`xmonth`='".$_POST['ddlMonth']."',`xyear`='".$_POST['ddlYear']."',`m_amount`='".$_POST['txtMAmount']."',`m_details`='".$_POST['txtMDetails']."' WHERE mcid='".$_GET['id']."'";
-	mysql_query($sql,$link);
+	mysqli_query($link,$sql);
 	$url = WEB_URL . 'maintenance/maintenance_cost_list.php?m=up';
 	header("Location: $url");
 }
@@ -44,8 +44,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_maintenance_cost where mcid = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link, "SELECT * FROM tbl_add_maintenance_cost where mcid = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$m_title = $row['m_title'];
 		$m_date = $row['m_date'];
@@ -60,7 +60,7 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$form_url = WEB_URL . "maintenance/add_maintenance_cost.php?id=".$_GET['id'];
 	}
 	
-	//mysql_close($link);
+	//mysqli_close($link);
 
 }
 	

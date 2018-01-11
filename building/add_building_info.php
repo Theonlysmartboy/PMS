@@ -29,15 +29,15 @@ $rowx_unit = array();
 
 if(isset($_POST['txtBName'])){
 	$sqlx = "DELETE FROM `tbl_add_building_info`";
-	mysql_query($sqlx,$link);
+	mysqli_query($link,$sqlx);
 	$image_url = uploadImage();
 	$sql = "INSERT INTO tbl_add_building_info(name,address, security_guard_mobile, secrataty_mobile,moderator_mobile,building_make_year,b_name,b_address,b_phone,building_image,branch_id) values('$_POST[txtBName]','$_POST[txtBAddress]','$_POST[txtBSecurityGuardMobile]','$_POST[txtBSecrataryMobile]','$_POST[txtBModeratorMobile]','$_POST[txtBMakeYear]','$_POST[txtBlName]','$_POST[txtBlAddress]','$_POST[txtBlPhone]','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	//mysql_close($link);
+	mysqli_query($link,$sql);
+	//mysqli_close($link);
 	
 }
-	$result = mysql_query("SELECT *,y.y_id,y.xyear FROM tbl_add_building_info bi inner join tbl_add_year_setup y on y.y_id = bi.building_make_year where bi.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by bi.name",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT *,y.y_id,y.xyear FROM tbl_add_building_info bi inner join tbl_add_year_setup y on y.y_id = bi.building_make_year where bi.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by bi.name");
+	while($row = mysqli_fetch_array($result)){
 		
 		$name = $row['name'];
 		$address = $row['address'];
@@ -53,7 +53,7 @@ if(isset($_POST['txtBName'])){
 			$img_track = $row['building_image'];
 		}
 	}
-	//mysql_close($link);
+	//mysqli_close($link);
 
 //for image upload
 function uploadImage(){

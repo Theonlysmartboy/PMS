@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['text_1'] 		= "Fare Collection Report";
 $_data['text_2'] 		= "Date";

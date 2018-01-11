@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['text_1'] 		= "Rented Report";
 $_data['text_5'] 		= "Tenant's Name";

@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['renter_list'] 								= "Renter List";
 $_data['update_rent'] 								= "Update Rent";

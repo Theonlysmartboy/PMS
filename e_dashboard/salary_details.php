@@ -40,8 +40,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_employee_salary_details.p
         	<?php
 				/*print_r($_SESSION['objLogin']);
 				die();*/
-				$result = mysql_query("Select *,m.month_name from tbl_add_employee_salary_setup es inner join tbl_add_month_setup m on m.m_id = es.month_id where emp_name = '". (int)$_SESSION['objLogin']['eid'] . "' order by emp_id desc",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"Select *,m.month_name from tbl_add_employee_salary_setup es inner join tbl_add_month_setup m on m.m_id = es.month_id where emp_name = '". (int)$_SESSION['objLogin']['eid'] . "' order by emp_id desc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 			if(file_exists(ROOT_PATH . '/img/upload/' . $_SESSION['objLogin']['image']) && $_SESSION['objLogin']['image'] != ''){
 				$image = WEB_URL . 'img/upload/' . $_SESSION['objLogin']['image'];
@@ -88,7 +88,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_employee_salary_details.p
             </div>
             </td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['add_new_unit'] 								= "Add New Unit";
 $_data['add_new_unit_entry_form'] 					= "Unit Entry Form";

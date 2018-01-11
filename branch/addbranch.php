@@ -24,16 +24,16 @@ $hdnid="0";
 if(isset($_POST['txtBrName'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 	$sql_branch = "INSERT INTO `tblbranch`(`branch_name`, `b_email`, `b_contact_no`, `b_address`,`b_status`) VALUES ('$_POST[txtBrName]','$_POST[txtBrEmail]','$_POST[txtBrConNo]','$_POST[txtareaAddress]','$_POST[radioStatus]')";
-	mysql_query($sql_branch,$link);
-	mysql_close($link);
+	mysqli_query($link, $sql_branch);
+	mysqli_close($link);
 	$url = WEB_URL . 'branch/branchlist.php?m=add';
 	header("Location: $url");
 	
 	}
 	else{
 		$sql_branch = "UPDATE `tblbranch` SET `branch_name`='".$_POST['txtBrName']."',`b_email`='".$_POST['txtBrEmail']."',`b_contact_no`='".$_POST['txtBrConNo']."',`b_address`='".$_POST['txtareaAddress']."',`b_status` ='".$_POST['radioStatus']."' WHERE branch_id = '".$_GET['id']."'";
-		mysql_query($sql_branch,$link);
-		mysql_close($link);
+		mysqli_query($link,$sql_branch);
+		mysqli_close($link);
 		$url = WEB_URL . 'branch/branchlist.php?m=up';
 		header("Location: $url");
 		
@@ -41,8 +41,8 @@ if(isset($_POST['txtBrName'])){
 	$success = "block";
 }
 	if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tblbranch where branch_id = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){ 
+	$result = mysqli_query($link,"SELECT * FROM tblbranch where branch_id = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){ 
 		
 		$branch_name = $row['branch_name'];
 		$b_email = $row['b_email'];
@@ -56,7 +56,7 @@ if(isset($_POST['txtBrName'])){
 		$form_url = WEB_URL . "branch/addbranch.php?id=".$_GET['id'];
 	}
 	
-	//mysql_close($link);
+	//mysqli_close($link);
 
 }
 if(isset($_GET['mode']) && $_GET['mode'] == 'view'){

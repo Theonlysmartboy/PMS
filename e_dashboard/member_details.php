@@ -40,8 +40,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_employee_member_details.p
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("Select *,mt.member_type as mt_type from tbl_add_management_committee mc inner join tbl_add_member_type mt on mt.member_id = mc.member_type order by mc_id desc",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"Select *,mt.member_type as mt_type from tbl_add_management_committee mc inner join tbl_add_member_type mt on mt.member_id = mc.member_type order by mc_id desc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 					if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){
 						$image = WEB_URL . 'img/upload/' . $row['image'];
@@ -85,7 +85,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_employee_member_details.p
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

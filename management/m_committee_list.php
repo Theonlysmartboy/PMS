@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_management_committee` WHERE mc_id = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -68,8 +68,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
               </thead>
               <tbody>
                 <?php
-				$result = mysql_query("Select *,mt.member_type as mt_member_type from tbl_add_management_committee mc inner join tbl_add_member_type mt on mc.member_type = mt.member_id where mc.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by mc.mc_id desc",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link, "Select *,mt.member_type as mt_member_type from tbl_add_management_committee mc inner join tbl_add_member_type mt on mc.member_type = mt.member_id where mc.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by mc.mc_id desc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/nmc_image.jpg';	
 					if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){
 						$image = WEB_URL . 'img/upload/' . $row['image'];
@@ -121,7 +121,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                       </div>
                     </div></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
             </table>
           </div>

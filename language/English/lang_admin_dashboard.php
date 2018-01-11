@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['dashboard_title'] 					= "Admin Dashboard";
 $_data['dashboard_more_info'] 				= "More Info";

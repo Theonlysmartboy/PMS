@@ -28,8 +28,8 @@ if(isset($_POST['txtCTitle'])){
 	$sql = "INSERT INTO tbl_add_complain(c_title,c_description, c_date, c_month,c_year,c_userid,branch_id) values('$_POST[txtCTitle]','$_POST[txtCDescription]','$_POST[txtCDate]',$xmonth,$xyear,'".(int)$_SESSION['objLogin']['aid']."','" . $_SESSION['objLogin']['branch_id'] . "')";
 	//echo $sql;
 	//die();
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'complain/complainlist.php?m=add';
 	header("Location: $url");
 	
@@ -38,7 +38,7 @@ else{
 	$sql = "UPDATE `tbl_add_complain` SET `c_title`='".$_POST['txtCTitle']."',`c_description`='".$_POST['txtCDescription']."',`c_date`='".$_POST['txtCDate']."' WHERE complain_id='".$_GET['id']."'";
 	//echo $sql;
 	//die();
-	mysql_query($sql,$link);
+	mysqli_query(link,$sql);
 	$url = WEB_URL . 'complain/complainlist.php?m=up';
 	header("Location: $url");
 }
@@ -47,8 +47,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_complain where complain_id = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_add_complain where complain_id = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$c_title = $row['c_title'];
 		$c_description = $row['c_description'];
@@ -60,7 +60,7 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$form_url = WEB_URL . "complain/addcomplain.php?id=".$_GET['id'];
 	}
 	
-	//mysql_close($link);
+	//mysqli_close($link);
 
 }	
 ?>

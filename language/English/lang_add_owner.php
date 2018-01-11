@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: sakosys.com
+//copyright: otema.com
 
 $_data['add_new_owner'] 							= "Add New Owner";
 $_data['add_new_owner_entry_form'] 					= "Owner Entry Form";

@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_complain` WHERE complain_id = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -65,8 +65,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("SELECT * FROM tbl_add_complain where branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by complain_id",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"SELECT * FROM tbl_add_complain where branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by complain_id");
+				while($row = mysqli_fetch_array($result)){?>
             <tr>
               <td><?php echo $row['c_date']; ?></td>
               <td><?php echo $row['c_title']; ?></td>
@@ -99,7 +99,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>
