@@ -1,11 +1,12 @@
 <?php
 define('CURRENCY', 'Ksh');
-define('WEB_URL', 'http://ariseandshinecarecenter.com/Pms/');
-define('ROOT_PATH', '/home/ariseand/public_html/Pms/');
+define('WEB_URL', 'http://127.0.0.1/Pms/');
+define('ROOT_PATH', 'C:/wamp/www/Pms/');
 
 
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'ariseand_pmsadm1');
-define('DB_PASSWORD', 'Osck4[i?UBED%TmUQS');
-define('DB_DATABASE', 'ariseand_pms');
-$link = mysqli_connect(DB_HOSTNAME,DB_USERNAME,DB_PASSWORD) or die(mysql_error());mysqli_select_db($link,DB_DATABASE) or die(mysql_error());?>
+define('DB_USERNAME', 'Tosby');
+define('DB_PASSWORD', 'MasterTosby2');
+define('DB_DATABASE', 'pms_db');
+$link = mysqli_connect(DB_HOSTNAME,DB_USERNAME,DB_PASSWORD) or die(mysqli_error());
+mysqli_select_db($link,DB_DATABASE) or die(mysqli_error());?>
