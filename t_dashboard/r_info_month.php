@@ -7,8 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 	die();
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_rented_r_all_info.php');
@@ -90,8 +90,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 				$utility_per_month_sub_total = 0;
 				$other_per_month_sub_total = 0;
 				$total_per_month_sub_total = 0;
-			$result = mysql_query("select *,r.r_name,o.o_name,fl.floor_no,u.unit_no,m.month_name,r.r_unit_no from tbl_add_fair f left join tbl_add_rent r on r.rid = f.rid left join tbl_add_owner o on o.ownid = f.rid inner join tbl_add_floor fl on fl.fid = f.floor_no inner join tbl_add_unit u on u.uid = f.unit_no inner join tbl_add_month_setup m on m.m_id = f.month_id where r.rid = '". (int)$_SESSION['objLogin']['rid'] . "' and f.month_id='".$_GET['mid']."'",$link);
-				while($row = mysql_fetch_array($result)){
+			$result = mysqli_query($link,"select *,r.r_name,o.o_name,fl.floor_no,u.unit_no,m.month_name,r.r_unit_no from tbl_add_fair f left join tbl_add_rent r on r.rid = f.rid left join tbl_add_owner o on o.ownid = f.rid inner join tbl_add_floor fl on fl.fid = f.floor_no inner join tbl_add_unit u on u.uid = f.unit_no inner join tbl_add_month_setup m on m.m_id = f.month_id where r.rid = '". (int)$_SESSION['objLogin']['rid'] . "' and f.month_id='".$_GET['mid']."'");
+				while($row = mysqli_fetch_array($result)){
 				$rent_per_month_sub_total +=(float)$row['rent'];
 				$gas_per_month_sub_total +=(float)$row['gas_bill'];
 				$electric_per_month_sub_total +=(float)$row['electric_bill'];
@@ -117,7 +117,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                   <td><?php echo $row['other_bill'].' '.CURRENCY; ?></td>
                   <td><?php echo $row['total_rent'].' '.CURRENCY; ?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <tfoot>
                 <tr>

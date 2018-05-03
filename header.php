@@ -42,6 +42,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <head>
 <meta charset="UTF-8">
 <title>Vidic PMS</title>
+<meta name="description" content="Real estate management, Property management,  ">
+<meta name="keywords" content="Real estate, management, property, deliver, PMS"/>
 <link rel="icon" type="image/png" href="<?php echo WEB_URL; ?>assets/img/vidiclogo.png">
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
@@ -62,9 +64,6 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <link href="<?php echo WEB_URL; ?>dist/css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo WEB_URL; ?>plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- jQuery 2.1.4 -->
-<script src="<?php echo WEB_URL; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<script src="<?php echo WEB_URL; ?>dist/js/printThis.js"></script>
 <!-- alertify core styles -->
 <link rel="stylesheet" href="<?php echo WEB_URL; ?>assets/alertify/themes/alertify.core.css" />
 <!-- alertify theme, can be included into the core instead of 2 separate files -->

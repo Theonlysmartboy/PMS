@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 function importDatabase($mysql_host,$mysql_database,$mysql_user,$mysql_password){
 	$db = new PDO("mysql:host=$mysql_host;dbname=$mysql_database", $mysql_user, $mysql_password);
-	$query = file_get_contents("ams_final.sql");
+	$query = file_get_contents("pms_db.sql");
 	$stmt = $db->prepare($query);
 	if ($stmt->execute())
 		 return true;
@@ -67,16 +67,16 @@ function home_base_url(){
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>SAKO AMS INSTALL</title>
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>PMS INSTALL</title>
 </head>
 <body>
 <br/>
-<div align="center"><a href="http://sakosys.com" target="_blank"><img src="logo2.JPG" width="114" height="114" border="0" style="width:30%;" /></a></div>
-<div style="font-weight:bold;font-size:20px;text-align:center;text-decoration:underline;color:#FF6600;"> Optimum Linkup Apartment Management System Setup Wizard </div>
+<div align="center"><a href="https://www.facebook.com/otelmaltd/" target="_blank"><img src="PmsLogo.png" width="114" height="114" border="0" style="width:30%;" alt="PROPERTY MANAGEMENT SYSTEM" /></a></div>
+<div style="font-weight:bold;font-size:20px;text-align:center;text-decoration:underline;color:#0e2058;"> Property Management System Setup Wizard </div>
 <br/>
 <div align="center" style="width:450px;margin:0 auto;padding:0;">
   <?php if($success_token == ''){ ?>
@@ -89,7 +89,7 @@ function home_base_url(){
     </tr>
     <tr>
       <td>Root Path : </td>
-      <td><input type="text" size="50" name="txtDocRoot" id="txtDocRoot" value="<?php echo DIR_SMS; ?>" /></td>
+      <td><input type="text" size="50" name="txtDocRoot" id="txtDocRoot" value="<?php echo DIR_PMS; ?>" /></td>
     </tr>
   </table>
   </fieldset>
@@ -110,7 +110,7 @@ function home_base_url(){
       </tr>
       <tr>
         <td>Database Password : </td>
-        <td><input type="text" name="txtPassword" id="txtPassword" />
+        <td><input type="password" name="txtPassword" id="txtPassword" />
           &nbsp;<span style="color:red;font-weight:bold;">*</span></td>
       </tr>
       <tr>
@@ -131,6 +131,8 @@ function home_base_url(){
 </div>
 <br/>
 <br/>
-<div align="center"><a target="_blank" href="http://optimumlinkup.com.ng" style="text-decoration:none;color:#000;font-size:13px;">Copyright © 2014-2016 optimumlinkup.com.ng. All rights reserved. </a></div>
+<div align="center"><a target="_blank" href="http://optimumlinkup.com.ng" style="text-decoration:none;color:#000;font-size:13px;">Copyright &copy; <script>var d = new Date();
+                var n = d.getFullYear();
+                document.write(n);</script> Otema All rights reserved. </a></div>
 </body>
 </html>

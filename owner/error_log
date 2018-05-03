@@ -1,0 +1,8 @@
+[12-Jan-2018 08:06:50 America/New_York] PHP Notice:  Undefined index: delete_owner_information in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 45
+[12-Jan-2018 08:06:50 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 71
+[12-Jan-2018 08:06:50 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 72
+[12-Jan-2018 08:06:50 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 134
+[21-Apr-2018 13:44:59 Africa/Nairobi] PHP Notice:  Undefined index: delete_owner_information in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 45
+[21-Apr-2018 13:44:59 Africa/Nairobi] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 71
+[21-Apr-2018 13:44:59 Africa/Nairobi] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 72
+[21-Apr-2018 13:44:59 Africa/Nairobi] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/owner/ownerlist.php on line 134

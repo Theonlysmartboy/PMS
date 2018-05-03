@@ -1,0 +1,6 @@
+[12-Jan-2018 04:09:10 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 74
+[12-Jan-2018 04:09:10 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 75
+[12-Jan-2018 04:09:10 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 143
+[12-Jan-2018 04:22:57 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 74
+[12-Jan-2018 04:22:57 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 75
+[12-Jan-2018 04:22:57 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/fair/fairlist.php on line 143

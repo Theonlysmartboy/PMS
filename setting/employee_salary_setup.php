@@ -24,16 +24,16 @@ if(isset($_POST['ddlEmpName'])){
 		if($_POST['hdnSpid'] == '0'){
 		$year = date('Y');
 	$sql="INSERT INTO `tbl_add_employee_salary_setup`(`emp_name`,`designation`,`month_id`,`xyear`,`amount`,`issue_date`,`branch_id`) VALUES ('$_POST[ddlEmpName]','$_POST[hdnDesg]','$_POST[ddlEmpMonth]',$year,'$_POST[txtEmpAmount]','$_POST[txtEmpIssueDate]','" . $_SESSION['objLogin']['branch_id'] . "')";	
-			mysql_query($sql, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/employee_salary_setup.php?m=add';
 		    header("Location: $url");
 		}
 else{
 	
 	$sql_update="UPDATE `tbl_add_employee_salary_setup` set emp_name = '$_POST[ddlEmpName]',`designation`='".$_POST['hdnDesg']."',`month_id`='".$_POST['ddlEmpMonth']."',`amount`='".$_POST['txtEmpAmount']."',`issue_date`='".$_POST['txtEmpIssueDate']."' where emp_id= '" . (int)$_POST['hdnSpid'] . "'";	
-			mysql_query($sql_update, $link);
-			mysql_close($link);
+			mysqli_query($link,$sql_update);
+			mysqli_close($link);
 		    $url = WEB_URL . 'setting/employee_salary_setup.php?m=up';
 		    header("Location: $url");
 			/*echo "<script>alert('Update Successfully');</script>";*/
@@ -43,8 +43,8 @@ $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysql_query("SELECT * FROM tbl_add_employee_salary_setup where emp_id= '" . (int)$_GET['spid'] . "' and branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-		if($row = mysql_fetch_array($result_location)){
+		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_employee_salary_setup where emp_id= '" . (int)$_GET['spid'] . "' and branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+		if($row = mysqli_fetch_array($result_location)){
 		 	$emp_name = $row['emp_name'];
 			$designation = $row['designation'];
 			$month_id = $row['month_id'];
@@ -85,8 +85,8 @@ if(isset($_GET['spid']) && $_GET['spid'] != ''){
             <select onchange="getDesgInfo(this.value)" name="ddlEmpName" id="ddlEmpName" class="form-control">
               <option value="">--<?php echo $_data['text_4'];?>--</option>
               <?php 
-				  	$result_emp = mysql_query("SELECT * FROM tbl_add_employee order by eid ASC",$link);
-					while($row_emp = mysql_fetch_array($result_emp)){?>
+				  	$result_emp = mysqli_query($link,"SELECT * FROM tbl_add_employee order by eid ASC");
+					while($row_emp = mysqli_fetch_array($result_emp)){?>
               <option <?php if($emp_name == $row_emp['eid']){echo 'selected';}?> value="<?php echo $row_emp['eid'];?>"><?php echo $row_emp['e_name'];?></option>
               <?php } ?>
             </select>
@@ -101,8 +101,8 @@ if(isset($_GET['spid']) && $_GET['spid'] != ''){
             <select name="ddlEmpMonth" id="ddlEmpMonth" class="form-control">
               <option value="">--<?php echo $_data['text_6'];?>--</option>
               <?php 
-			  $result_month = mysql_query("SELECT * FROM tbl_add_month_setup order by m_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+			  $result_month = mysqli_query($link,"SELECT * FROM tbl_add_month_setup order by m_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($month_id == $row_month['m_id']){echo 'selected';}?> value="<?php echo $row_month['m_id'];?>"><?php echo $row_month['month_name'];?></option>
               <?php } ?>
             </select>
@@ -134,7 +134,7 @@ $addinfo = 'none';
 $msg = "";
  if(isset($_GET['delid']) && $_GET['delid'] != '' && $_GET['delid'] > 0){
 		$sqlx= "DELETE FROM `tbl_add_employee_salary_setup` WHERE emp_id = ".$_GET['delid'];
-		mysql_query($sqlx,$link); 
+		mysqli_query($sqlx,$link); 
 		$delinfo = 'block';
 	}
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -178,8 +178,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                 </thead>
                 <tbody>
                   <?php
-				$result = mysql_query("SELECT *,e.e_name,m.month_name FROM tbl_add_employee_salary_setup es inner join tbl_add_employee e on es.emp_name = e.eid inner join tbl_add_month_setup m on m.m_id = es.month_id where es.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by es.emp_id ASC ",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"SELECT *,e.e_name,m.month_name FROM tbl_add_employee_salary_setup es inner join tbl_add_employee e on es.emp_name = e.eid inner join tbl_add_month_setup m on m.m_id = es.month_id where es.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by es.emp_id ASC ");
+				while($row = mysqli_fetch_array($result)){?>
                   <tr>
 					<td><?php echo $row['e_name']; ?></td>
                     <td><?php echo $row['designation']; ?></td>
@@ -219,7 +219,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                         </div>
                       </div></td>
                   </tr>
-                  <?php } mysql_close($link); ?>
+                  <?php } mysqli_close($link); ?>
                 </tbody>
               </table>
             </div>

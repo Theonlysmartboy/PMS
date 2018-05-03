@@ -28,8 +28,8 @@ if(isset($_POST['txtName'])){
 	$month = date('m');
 	$year = date('Y');
 	$sql = "INSERT INTO `tbl_visitor`(issue_date,name,mobile,address,floor_id,unit_id,intime,outtime,xmonth,xyear,branch_id) values('$_POST[txtIssueDate]','$_POST[txtName]','$_POST[txtMobile]','$_POST[txtAddress]','$_POST[ddlFloorNo]','$_POST[ddlUnitNo]','$_POST[txtInTime]','$_POST[txtOutTime]',$month,$year,'" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'visitor/visitorlist.php?m=add';
 	header("Location: $url");
 	
@@ -37,7 +37,7 @@ if(isset($_POST['txtName'])){
 else{
 	
 	$sql = "UPDATE `tbl_visitor` SET `issue_date`='".$_POST['txtIssueDate']."',`name`='".$_POST['txtName']."',`mobile`='".$_POST['txtMobile']."',`address`='".$_POST['txtAddress']."',`floor_id`='".$_POST['ddlFloorNo']."',`unit_id`='".$_POST['ddlUnitNo']."',`intime`='".$_POST['txtInTime']."',`outtime`='".$_POST['txtOutTime']."' WHERE vid='".$_GET['id']."'";
-	mysql_query($sql,$link);
+	mysqli_query($link,$sql);
 	$url = WEB_URL . 'visitor/visitorlist.php?m=up';
 	header("Location: $url");
 }
@@ -46,8 +46,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_visitor where vid = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_visitor where vid = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$issue_date = $row['issue_date'];
 		$name = $row['name'];
@@ -64,7 +64,7 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$form_url = WEB_URL . "visitor/addvisitor.php?id=".$_GET['id'];
 	}
 	
-	//mysql_close($link);
+	//mysqli_close($link);
 
 }	
 ?>

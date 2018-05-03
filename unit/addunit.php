@@ -19,15 +19,15 @@ $hdnid="0";
 if(isset($_POST['ddlFloor'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 		$sql = "INSERT INTO `tbl_add_unit`(floor_no,unit_no,branch_id) values('$_POST[ddlFloor]','$_POST[txtUnit]','" . $_SESSION['objLogin']['branch_id'] . "')";
-		mysql_query($sql,$link);
-		mysql_close($link);
+		mysqli_query($link,$sql);
+		mysqli_close($link);
 		$url = WEB_URL . 'unit/unitlist.php?m=add';
 		header("Location: $url");
 	}
 	else{
 		$sql = "UPDATE `tbl_add_unit` SET `floor_no`='".$_POST['ddlFloor']."',`unit_no`='".$_POST['txtUnit']."' WHERE uid='".$_GET['id']."'";
-		mysql_query($sql,$link);
-		mysql_close($link);
+		mysqli_query($link,$sql);
+		mysqli_close($link);
 		$url = WEB_URL . 'unit/unitlist.php?m=up';
 		header("Location: $url");
 	}
@@ -35,8 +35,8 @@ if(isset($_POST['ddlFloor'])){
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_unit where uid = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_add_unit where uid = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		$floor_no = $row['floor_no'];
 		$unit_no = $row['unit_no'];
 		$hdnid = $_GET['id'];

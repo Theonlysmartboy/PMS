@@ -29,16 +29,16 @@ if(isset($_POST['ddlOwnerName'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 
 	$sql = "INSERT INTO tbl_add_fund(owner_id,month_id,xyear,f_date,total_amount,purpose,branch_id) values('$_POST[ddlOwnerName]','$_POST[ddlMonth]','$_POST[ddlYear]','$_POST[txtDate]','$_POST[txtTotalAmount]','$_POST[txtPurpose]','" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'fund/fund_list.php?m=add';
 	header("Location: $url");
 	
 }
 else{
 	$sql = "UPDATE `tbl_add_fund` SET `owner_id`='".$_POST['ddlOwnerName']."',`month_id`='".$_POST['ddlMonth']."',`xyear`='".$_POST['ddlYear']."',`f_date`='".$_POST['txtDate']."',`total_amount`='".$_POST['txtTotalAmount']."',`purpose`='".$_POST['txtPurpose']."' WHERE fund_id='".$_GET['id']."'";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'fund/fund_list.php?m=up';
 	header("Location: $url");
 }
@@ -47,8 +47,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT *,o.o_name,o.ownid FROM tbl_add_fund fu inner join tbl_add_owner o on o.ownid = fu.owner_id where fu.fund_id = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT *,o.o_name,o.ownid FROM tbl_add_fund fu inner join tbl_add_owner o on o.ownid = fu.owner_id where fu.fund_id = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 	
 		$owner_id = $row['owner_id'];
 		$month_id = $row['month_id'];
@@ -98,8 +98,8 @@ else{
             <select name="ddlOwnerName" id="ddlOwnerName" class="form-control">
               <option value="">--<?php echo $_data['add_new_form_field_text_2'];?>--</option>
               <?php 
-				  	$result_owner = mysql_query("SELECT * FROM tbl_add_owner order by ownid ASC",$link);
-					while($row_owner = mysql_fetch_array($result_owner)){?>
+				  	$result_owner = mysqli_query($link,"SELECT * FROM tbl_add_owner order by ownid ASC");
+					while($row_owner = mysqli_fetch_array($result_owner)){?>
               <option <?php if($owner_id == $row_owner['ownid']){echo 'selected';}?> value="<?php echo $row_owner['ownid'];?>"><?php echo $row_owner['o_name'];?></option>
               <?php } ?>
             </select>
@@ -109,8 +109,8 @@ else{
             <select name="ddlMonth" id="ddlMonth" class="form-control">
               <option value="">--<?php echo $_data['add_new_form_field_text_3'];?>--</option>
               <?php 
-				  	$result_month = mysql_query("SELECT * FROM tbl_add_month_setup order by m_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+				  	$result_month = mysqli_query($link,"SELECT * FROM tbl_add_month_setup order by m_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($month_id == $row_month['m_id']){echo 'selected';}?> value="<?php echo $row_month['m_id'];?>"><?php echo $row_month['month_name'];?></option>
               <?php } ?>
             </select>
@@ -120,8 +120,8 @@ else{
             <select name="ddlYear" id="ddlYear" class="form-control">
               <option value="">--<?php echo $_data['add_new_form_field_text_5'];?>--</option>
               <?php 
-				  	$result_month = mysql_query("SELECT * FROM tbl_add_year_setup order by y_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+				  	$result_month = mysqli_query($link,"SELECT * FROM tbl_add_year_setup order by y_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($xyear == $row_month['y_id']){echo 'selected';}?> value="<?php echo $row_month['y_id'];?>"><?php echo $row_month['xyear'];?></option>
               <?php } ?>
             </select>

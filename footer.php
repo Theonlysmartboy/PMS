@@ -7,6 +7,9 @@
 <div class='control-sidebar-bg'></div>
 </div>
 <!-- ./wrapper -->
+<!-- jQuery 2.1.4 -->
+<script src="<?php echo WEB_URL; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo WEB_URL; ?>dist/js/printThis.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script src="<?php echo WEB_URL; ?>bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- SlimScroll -->

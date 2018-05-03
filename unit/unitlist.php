@@ -11,7 +11,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_unit` WHERE uid = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -63,8 +63,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("Select f.floor_no,u.unit_no,u.uid from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no where u.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by u.uid ASC",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query($link,"Select f.floor_no,u.unit_no,u.uid from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no where u.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by u.uid ASC");
+				while($row = mysqli_fetch_array($result)){?>
             <tr>
               <td><?php echo $row['floor_no']; ?></td>
               <td><?php echo $row['unit_no']; ?></td>
@@ -93,7 +93,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
           <tfoot>
             <tr>

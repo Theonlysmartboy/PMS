@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_fund` WHERE fund_id = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -69,8 +69,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
         <?php
-		$result = mysql_query("Select *,ow.o_name,ow.image,m.month_name,y.xyear as y_xyear from tbl_add_fund fu inner join tbl_add_owner ow on ow.ownid = fu.owner_id inner join tbl_add_month_setup m on m.m_id = fu.month_id inner join tbl_add_year_setup y on y.y_id = fu.xyear where fu.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fu.fund_id desc",$link);
-				while($row = mysql_fetch_array($result)){
+		$result = mysqli_query($link,"Select *,ow.o_name,ow.image,m.month_name,y.xyear as y_xyear from tbl_add_fund fu inner join tbl_add_owner ow on ow.ownid = fu.owner_id inner join tbl_add_month_setup m on m.m_id = fu.month_id inner join tbl_add_year_setup y on y.y_id = fu.xyear where fu.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fu.fund_id desc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 					if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){
 						$image = WEB_URL . 'img/upload/' . $row['image'];
@@ -123,7 +123,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
             </div>
             </td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

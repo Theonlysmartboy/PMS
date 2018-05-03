@@ -51,7 +51,7 @@ else{
 			$e_status = 1;
 	}
 	$sql = "UPDATE `tbl_add_employee` SET `e_name`='".$_POST['txtEmpName']."',`e_email`='".$_POST['txtEmpEmail']."',`e_password`='".$_POST['txtPassword']."',`e_contact`='".$_POST['txtEmpContact']."',`e_pre_address`='".$_POST['txtEmpPreAddress']."',`e_per_address`='".$_POST['txtEmpPerAddress']."',`e_nid`='".$_POST['txtEmpNID']."',`e_designation`='".$_POST['ddlMemberType']."',`e_date`='".$_POST['txtEmpDate']."',`ending_date`='".$_POST['txtEndingDate']."',`e_status`='".$e_status."',`image`='".$image_url."' WHERE eid='".$_GET['id']."'";
-	mysql_query($sql,$link);
+	mysqli_query($link,$sql);
 	$url = WEB_URL . 'employee/employeelist.php?m=up';
 	header("Location: $url");
 }
@@ -60,8 +60,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_employee where eid = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_add_employee where eid = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$e_name = $row['e_name'];
 		$e_email = $row['e_email'];

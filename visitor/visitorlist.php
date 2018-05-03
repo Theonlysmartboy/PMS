@@ -11,7 +11,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_visitor` WHERE vid = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -69,8 +69,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id where v.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fr.fid desc",$link);
-				while($row = mysql_fetch_array($result)){?>
+				$result = mysqli_query("Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id where v.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fr.fid desc",$link);
+				while($row = mysqli_fetch_array($result)){?>
             <tr>
               <td><?php echo $row['issue_date']; ?></td>
               <td><?php echo $row['name']; ?></td>
@@ -82,7 +82,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
               <td><?php echo $row['outtime']; ?></td>
               <td><a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL;?>visitor/addvisitor.php?id=<?php echo $row['vid']; ?>" data-original-title="<?php echo $_data['edit_text'];?>"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onclick="deleteFloor(<?php echo $row['vid']; ?>);" href="javascript:;" data-original-title="<?php echo $_data['delete_text'];?>"><i class="fa fa-trash-o"></i></a> </td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>
