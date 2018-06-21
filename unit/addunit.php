@@ -8,6 +8,7 @@ if (!isset($_SESSION['objLogin'])) {
 $success = "none";
 $floor_no = '';
 $unit_no = '';
+$size = '';
 $branch_id = '';
 $title = $_data['add_new_unit'];
 $button_text = $_data['save_button_text'];
@@ -18,7 +19,7 @@ $hdnid = "0";
 
 if (isset($_POST['ddlFloor'])) {
     if (isset($_POST['hdn']) && $_POST['hdn'] == '0') {
-        $sql = "INSERT INTO `tbl_add_unit`(floor_no,unit_no,branch_id) values('$_POST[ddlFloor]','$_POST[txtUnit]','" . $_SESSION['objLogin']['branch_id'] . "')";
+        $sql = "INSERT INTO `tbl_add_unit`(floor_no,unit_no,size,branch_id) values('$_POST[ddlFloor]','$_POST[txtUnit]','$_POST[txtSize]','" . $_SESSION['objLogin']['branch_id'] . "')";
         mysqli_query($link, $sql);
         mysqli_close($link);
         $url = WEB_URL . 'unit/unitlist.php?m=add';
@@ -38,6 +39,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     while ($row = mysqli_fetch_array($result)) {
         $floor_no = $row['floor_no'];
         $unit_no = $row['unit_no'];
+        $size = $row['size'];
         $hdnid = $_GET['id'];
         $title = 'Update Floor';
         $button_text = $_data['update_button_text'];
@@ -71,22 +73,28 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'view') {
                     <form onSubmit="return validateMe();" action="<?php echo $form_url; ?>" method="post" enctype="multipart/form-data">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="txtUnit"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
-                                <input type="text" name="txtUnit" id="txtUnit" class="form-control" />
-                            </div>
-                            <div class="form-group">
                                 <label for="ddlFloor"><?php echo $_data['add_new_form_field_text_1']; ?> :</label>
                                 <select name="ddlFloor" id="ddlFloor" class="form-control">
                                     <option value="">--<?php echo $_data['add_new_form_field_text_1']; ?>--</option>
                                     <?php
-                                    $result_floor = mysqli_query($link, "Select * from tbl_add_floor where branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fid desc");
+                                    $result_floor = mysqli_query($link, "Select * from tbl_add_floor where branch_id = " . (int) $_SESSION['objLogin']['branch_id'] . " order by fid desc");
                                     while ($floor_no = mysqli_fetch_array($result_floor)) {
                                         ?>
-                                        <option <?php if ($floor_no == $floor_no['fid']) {
-                                        echo 'selected';
-                                    } ?> value="<?php echo $floor_no['fid']; ?>"><?php echo $floor_no['floor_no']; ?></option>
-<?php } ?>
+                                        <option <?php
+                                        if ($floor_no == $floor_no['fid']) {
+                                            echo 'selected';
+                                        }
+                                        ?> value="<?php echo $floor_no['fid']; ?>"><?php echo $floor_no['floor_no']; ?></option>
+                                        <?php } ?>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtUnit"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
+                                <input type="text" name="txtUnit" id="txtUnit" class="form-control" />
+                            </div>
+                             <div class="form-group">
+                                <label for="txtSize"><?php echo $_data['add_new_form_field_text_3']; ?> :</label>
+                                <input type="text" name="txtSize" id="txtSize" class="form-control" />
                             </div>
                             <div class="form-group pull-right">
                                 <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
@@ -112,9 +120,14 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'view') {
                 alert("Unit Required !!!");
                 $("#txtUnit").focus();
                 return false;
+                else if ($("#txtSize").val() == '') {
+                    alert("Unit size required !!!");
+                    $("#txtSize").focus();
+                    return false;
+                }
             } else {
                 return true;
             }
         }
     </script>
-<?php include('../footer.php'); ?>
+    <?php include('../footer.php'); ?>
