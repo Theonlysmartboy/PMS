@@ -25,28 +25,25 @@ $hdnid="0";
 $image_own = WEB_URL . 'img/no_image.jpg';
 $img_track = '';
 $rowx_unit = array();
-
 if(isset($_POST['txtOwnerName'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 	$o_password = $_POST['txtPassword'];
 	$image_url = uploadImage();
 	$sql = "INSERT INTO tbl_add_owner(o_name,o_email, o_contact, o_pre_address,o_per_address,o_nid,o_password,image,branch_id) values('$_POST[txtOwnerName]','$_POST[txtOwnerEmail]','$_POST[txtOwnerContact]','$_POST[txtOwnerPreAddress]','$_POST[txtOwnerPerAddress]','$_POST[txtOwnerNID]','$o_password','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	 $last_id = mysql_insert_id();
+	mysqli_query($link,$sql);
+	 $last_id = mysqli_insert_id();
 	  if(isset($_POST['ChkOwnerUnit'])){   /*if open */
 		foreach ($_POST['ChkOwnerUnit'] as $value) {   /*foreach open */
 			$sql_unit="INSERT INTO `tbl_add_owner_unit_relation`(owner_id,unit_id) VALUES($last_id,$value)";
-			mysql_query($sql_unit,$link);	 
+			mysqli_query($link,$sql_unit);	 
 		}  /* foreach close */
 	  }  /* if close */
 	  else {
 			echo "No results";  
 	  }
-
-	mysql_close($link);
+	mysqli_close($link);
 	$url = WEB_URL . 'owner/ownerlist.php?m=add';
 	header("Location: $url");
-	
 }
 else{
 	$image_url = uploadImage();
@@ -54,7 +51,7 @@ else{
 		$image_url = $_POST['img_exist'];
 	}
 	$sql = "UPDATE `tbl_add_owner` SET `o_name`='".$_POST['txtOwnerName']."',`o_email`='".$_POST['txtOwnerEmail']."',`o_password`='".$_POST['txtPassword']."',`o_contact`='".$_POST['txtOwnerContact']."',`o_pre_address`='".$_POST['txtOwnerPreAddress']."',`o_per_address`='".$_POST['txtOwnerPerAddress']."',`o_nid`='".$_POST['txtOwnerNID']."',`image`='".$image_url."' WHERE ownid='".$_GET['id']."'";
-	mysql_query($sql,$link);
+	mysqli_query($link,$sql);
 	if(isset($_POST['ChkOwnerUnit'])){  /* if open */
 		$sql_unit= "DELETE FROM `tbl_add_owner_unit_relation` WHERE owner_id = ".$_GET['id'];
 		mysql_query($sql_unit,$link);
@@ -75,8 +72,8 @@ $success = "block";
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT * FROM tbl_add_owner where ownid = '" . $_GET['id'] . "'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT * FROM tbl_add_owner where ownid = '" . $_GET['id'] . "'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$o_name = $row['o_name'];
 		$o_email = $row['o_email'];
@@ -95,8 +92,8 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$successful_msg = $_data['update_owner_successfully'];
 		$form_url = WEB_URL . "owner/addowner.php?id=".$_GET['id'];
 	}
-	$result_unit = mysql_query("SELECT unit_id FROM tbl_add_owner_unit_relation where owner_id = '" . $_GET['id'] . "'",$link);
-	while($row_unit = mysql_fetch_array($result_unit)){
+	$result_unit = mysqli_query($link,"SELECT unit_id FROM tbl_add_owner_unit_relation where owner_id = '" . $_GET['id'] . "'");
+	while($row_unit = mysqli_fetch_array($result_unit)){
 		array_push($rowx_unit,$row_unit['unit_id']);
 	}
 	//mysql_close($link);
@@ -149,6 +146,42 @@ function NewGuid() {
     <div class="box box-info">
       <div class="box-header">
         <h3 class="box-title"><?php echo $_data['add_new_owner_entry_form'];?></h3>
+          <form onSubmit="return validateMe();" action="<?php echo $form_url; ?>" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="txtOwnerName"><?php echo $_data['add_new_form_field_text_1']; ?> :</label>
+                                <input type="text" name="txtOwnerName" id="txtOwnerName" class="form-control" />
+                            </div> 
+                            <div class="form-group">
+                                <label for="txtOwnerEmail"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
+                                <input type="text" name="txtOwnerEmail" id="txtOwnerEmail" class="form-control" />
+                            </div>
+                             <div class="form-group">
+                                <label for="txtOwnerContact"><?php echo $_data['add_new_form_field_text_4']; ?> :</label>
+                                <input type="text" name="txtOwnerContact" id="txtOwnerContact" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtOwnerPreAddress"><?php echo $_data['add_new_form_field_text_5']; ?> :</label>
+                                <input type="text" name="txtOwnerPreAddress" id="txtOwnerPreAddress" class="form-control" />
+                            </div> 
+                            <div class="form-group">
+                                <label for="txtOwnerPerAddress"><?php echo $_data['add_new_form_field_text_6']; ?> :</label>
+                                <input type="text" name="txtOwnerPerAddress" id="txtOwnerPerAddress" class="form-control" />
+                            </div>
+                             <div class="form-group">
+                                <label for="txtOwnerNID"><?php echo $_data['add_new_form_field_text_7']; ?> :</label>
+                                <input type="text" name="txtOwnerNID" id="txtOwnerNID" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPassword"><?php echo $_data['add_new_form_field_text_3']; ?> :</label>
+                                <input type="password" name="txtPassword" id="txtPassword" class="form-control" />
+                            </div>
+                            <div class="form-group pull-right">
+                                <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="<?php echo $hdnid; ?>" name="hdn"/>
+                    </form>
       </div>
      
       <!-- /.box-body -->
