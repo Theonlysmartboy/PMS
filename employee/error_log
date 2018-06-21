@@ -1,8 +1,0 @@
-[12-Jan-2018 03:40:47 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 71
-[12-Jan-2018 03:40:47 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 72
-[12-Jan-2018 03:40:47 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 118
-[12-Jan-2018 03:47:41 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 71
-[12-Jan-2018 03:47:41 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 72
-[12-Jan-2018 03:47:41 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 118
-[12-Jan-2018 03:55:13 America/New_York] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 118
-[12-Jan-2018 08:08:55 America/New_York] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/ariseand/public_html/Pms/employee/employeelist.php on line 15

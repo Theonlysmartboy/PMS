@@ -1,3 +1,0 @@
-[12-Jan-2018 03:30:23 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ariseand/public_html/Pms/config.php on line 11
-[12-Jan-2018 03:30:23 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, resource given in /home/ariseand/public_html/Pms/index.php on line 128
-[12-Jan-2018 03:30:23 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/ariseand/public_html/Pms/index.php on line 129
