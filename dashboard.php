@@ -246,4 +246,6 @@ if($row_ou_total = mysqli_fetch_array($result_ou)){
   <!-- /.row end -->
 </section>
 <!-- /.content -->
+<section class="content-footer">
 <?php include('footer.php'); ?>
+</section>

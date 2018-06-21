@@ -112,6 +112,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
   <!-- /.col -->
 </div>
 <!-- /.row -->
+</section>
 <script type="text/javascript">
 function deleteFloor(Id){
   	var iAnswer = confirm("Are you sure you want to delete this Floor ?");

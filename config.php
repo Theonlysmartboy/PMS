@@ -1,7 +1,7 @@
 <?php
 define('CURRENCY', 'Ksh');
 define('WEB_URL', 'http://127.0.0.1/Pms/');
-define('ROOT_PATH', 'C:/wamp/www/Pms/');
+define('ROOT_PATH', 'C:/wamp64/www/Pms/');
 
 
 define('DB_HOSTNAME', 'localhost');
