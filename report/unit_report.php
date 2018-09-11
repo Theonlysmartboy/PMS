@@ -7,6 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 }
 $status =  "";
 $button_text = $_data['submit'];
+$hdnid = '';
+$form_url = WEB_URL . "report/unit_report.php";
 
 if(isset($_GET['ddlUStatus'])){
 	$status = $_GET['ddlUStatus'];

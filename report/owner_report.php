@@ -45,8 +45,8 @@ if(isset($_GET['mid'])){
             <select onchange="getUnit(this.value)" name="ddlFloorNo" id="ddlFloorNo" class="form-control">
               <option value="">--Select Floor--</option>
               <?php 
-			  $result_floor = mysql_query("SELECT * FROM tbl_add_floor order by fid ASC",$link);
-					while($row_floor = mysql_fetch_array($result_floor)){?>
+			  $result_floor = mysqli_query($link,"SELECT * FROM tbl_add_floor order by fid ASC");
+					while($row_floor = mysqli_fetch_array($result_floor)){?>
               <option <?php if($floor_id == $row_floor['fid']){echo 'selected';}?> value="<?php echo $row_floor['fid'];?>"><?php echo $row_floor['floor_no'];?></option>
               <?php } ?>
             </select>
@@ -56,8 +56,8 @@ if(isset($_GET['mid'])){
             <select name="ddlUnitNo" id="ddlUnitNo" class="form-control">
               <option value="">--Select Unit--</option>
               <?php 
-			  $result_unit = mysql_query("SELECT * FROM tbl_add_unit order by uid ASC",$link);
-					while($row_unit = mysql_fetch_array($result_unit)){?>
+			  $result_unit = mysqli_query($link,"SELECT * FROM tbl_add_unit order by uid ASC");
+					while($row_unit = mysqli_fetch_array($result_unit)){?>
               <option <?php if($unit_id == $row_unit['uid']){echo 'selected';}?> value="<?php echo $row_unit['uid'];?>"><?php echo $row_unit['unit_no'];?></option>
               <?php } ?>
             </select>
@@ -67,8 +67,8 @@ if(isset($_GET['mid'])){
             <select name="ddlMonth" id="ddlMonth" class="form-control">
               <option value="">--Select Month--</option>
               <?php 
-			  $result_month = mysql_query("SELECT * FROM tbl_add_month_setup order by m_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+			  $result_month = mysqli_query($link,"SELECT * FROM tbl_add_month_setup order by m_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($month_id == $row_month['m_id']){echo 'selected';}?> value="<?php echo $row_month['m_id'];?>"><?php echo $row_month['month_name'];?></option>
               <?php } ?>
             </select>

@@ -1,12 +1,11 @@
 <?php
 define('CURRENCY', 'Ksh');
-define('WEB_URL', 'http://127.0.0.1/Pms/');
-define('ROOT_PATH', 'C:/wamp64/www/Pms/');
-
+define('ROOT_PATH', '/var/www/html/pms/');
+define('WEB_URL', 'http://192.168.1.210/pms/');
 
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'Tosby');
-define('DB_PASSWORD', 'MasterTosby2');
-define('DB_DATABASE', 'pms_db');
-$link = mysqli_connect(DB_HOSTNAME,DB_USERNAME,DB_PASSWORD) or die(mysqli_error());
-mysqli_select_db($link,DB_DATABASE) or die(mysqli_error());?>
+define('DB_USERNAME', 'vidic_pms');
+define('DB_PASSWORD', 'sql@VIDIC%18');
+define('DB_DATABASE', 'vidic_pms');
+$link = mysqli_connect(DB_HOSTNAME,DB_USERNAME,DB_PASSWORD) or die(mysql_error());
+mysqli_select_db($link,DB_DATABASE) or die(mysql_error());?>

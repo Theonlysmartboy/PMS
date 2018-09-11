@@ -82,7 +82,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               </thead>
               <tbody>
             <?php
-			$result = mysqli_query("Select *,bt.bill_type as bt_type,m.month_name,y.xyear,bt.bt_id from tbl_add_bill b inner join tbl_add_bill_type bt on bt.bt_id = b.bill_type inner join tbl_add_month_setup m on m.m_id = b.bill_month inner join tbl_add_year_setup y on y.y_id = b.bill_year where b.bill_month='".$_GET['mid']."' and b.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
+			$result = mysqli_query($link,"Select *,bt.bill_type as bt_type,m.month_name,y.xyear,bt.bt_id from tbl_add_bill b inner join tbl_add_bill_type bt on bt.bt_id = b.bill_type inner join tbl_add_month_setup m on m.m_id = b.bill_month inner join tbl_add_year_setup y on y.y_id = b.bill_year where b.bill_month='".$_GET['mid']."' and b.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
 				while($row = mysqli_fetch_array($result)){?>
                 <tr>
                   <td><?php echo $row['bt_type']; ?></td>

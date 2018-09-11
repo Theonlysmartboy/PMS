@@ -22,7 +22,7 @@
 			else if($_SESSION['login_type'] == '5'){
 				$sql = "UPDATE `tblsuper_admin` set name = '$name', email = '$email', password = '$password' where user_id = '$_POST[user_id]'";
 			}
-			mysql_query($sql,$link);
+			mysqli_query$link,sql);
 			echo "1";
 			die();
 		}

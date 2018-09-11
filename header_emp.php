@@ -16,8 +16,8 @@ function curPageURL() {
  return $pageURL;
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_left_menu.php');
@@ -38,8 +38,8 @@ if(isset($_SESSION['objLogin']['image'])){
 }
 
 $desig = '';
-$resultx = mysql_query("SELECT member_type FROM tbl_add_member_type where member_id =".(int)$_SESSION['objLogin']['e_designation'],$link);
-if($rowx = mysql_fetch_array($resultx)){
+$resultx = mysqli_query($link,"SELECT member_type FROM tbl_add_member_type where member_id =".(int)$_SESSION['objLogin']['e_designation']);
+if($rowx = mysqli_fetch_array($resultx)){
 	$desig = $rowx['member_type'];
 }
 ?>

@@ -7,8 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 	die();
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_unit_status_info.php');
@@ -18,7 +18,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sako Apartment Management System</title>
+<title>Property Management System</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -71,14 +71,14 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               </thead>
               <tbody>
             <?php
-			$result = mysql_query("Select *,f.floor_no as ffloorno from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no where u.status='".$_GET['usid']."' and u.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){?>
+			$result = mysqli_query($link,"Select *,f.floor_no as ffloorno from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no where u.status='".$_GET['usid']."' and u.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){?>
                 <tr>
                     <td><?php echo $row['ffloorno']; ?></td>
             		<td><?php echo $row['unit_no']; ?></td>
                     <td><?php if($row['status'] == '1'){echo $_data['text_5'];} else{echo $_data['text_6'];}?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <!--<tfoot>
                 <tr>

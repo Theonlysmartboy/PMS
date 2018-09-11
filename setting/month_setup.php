@@ -37,7 +37,7 @@ $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_month_setup where m_id= '" . (int)$_GET['spid'] . "'");
+		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_month_setup where m_id= '" . (int)$_GET['spid'] . "' ORDER BY m_id ASC");
 		if($row = mysqli_fetch_array($result_location)){
 		 	$month_name = $row['month_name'];
 			$button_text = $_data['update_button_text'];

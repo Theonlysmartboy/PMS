@@ -28,8 +28,8 @@ if(isset($_SESSION['objLogin']['image'])){
 		$image = WEB_URL . 'img/upload/' . $_SESSION['objLogin']['image'];
 	}
 }
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_left_menu.php');
@@ -39,7 +39,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SAKO AMS</title>
+<title>VIDIC PMS</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -71,9 +71,9 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <body class="skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-<span class="main-header"><a href="dashboard.php" class="logo"><span class="logo-mini">OPT</span>
+<span class="main-header"><a href="dashboard.php" class="logo"><span class="logo-mini">PMS</span>
 <!-- logo for regular state and mobile devices -->
-<span class="logo-lg"><b>Optimum</b> Apartment Management System</span> </a>
+<span class="logo-lg"><b>PMS</b>Property Management System</span> </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">
   <!-- Sidebar toggle button-->

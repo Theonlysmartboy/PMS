@@ -81,9 +81,9 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
   <!-- Logo -->
   <a href="dashboard.php" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
-  <span class="logo-mini">OPT</span>
+  <span class="logo-mini">PMS</span>
   <!-- logo for regular state and mobile devices -->
-  <span class="logo-lg"><b>Vidic</b> Property Management System</span> </a>
+  <span class="logo-lg">Property Management System</span> </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
@@ -215,12 +215,20 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 		  <li class="<?php if($page_name != '' && $page_name == 'addvisitor'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>visitor/addvisitor.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['menu_add_visitor'];?></a></li>
         </ul>
       </li>
-      <li class="treeview <?php if($page_name != '' && $page_name == 'addbranch' || $page_name == 'branchlist'){echo 'active';}?>"> <a href="#"> <i class="fa fa-users"></i> <span><?php echo $_data['branch'];?></span> <i class="fa fa-angle-left pull-right"></i> </a>
+      <li class="treeview <?php if($page_name != '' && $page_name == 'addbranch' || $page_name == 'branchlist'){echo 'active';}?>"> <a href="#"> <i class="fa fa-code-fork"></i> <span><?php echo $_data['branch'];?></span> <i class="fa fa-angle-left pull-right"></i> </a>
         <ul class="treeview-menu">
           <li class="<?php if($page_name != '' && $page_name == 'branchlist'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>branch/branchlist.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['branch_list'];?></a></li>
 		  <li class="<?php if($page_name != '' && $page_name == 'addbranch'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>branch/addbranch.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['add_branch'];?></a></li>
         </ul>
       </li>
+
+<li class="treeview <?php if($page_name != '' && $page_name == 'add_asset' || $page_name == 'asset_list'){echo 'active';}?>"> <a href="#"> <i class="fa fa-building"></i> <span><?php echo $_data['asset'];?></span> <i class="fa fa-angle-left pull-right"></i> </a>
+        <ul class="treeview-menu">
+          <li class="<?php if($page_name != '' && $page_name == 'asset_list'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>asset_registry/asset_list.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['asset_list'];?></a></li>
+		  <li class="<?php if($page_name != '' && $page_name == 'add_asset'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>asset_registry/add_asset.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['add_asset'];?></a></li>
+        </ul>
+      </li>
+
       <li class="treeview <?php if($page_name != '' && $page_name == 'fair_report' || $page_name == 'rented_report' || $page_name == 'visitors_report' || $page_name == 'complain_report' || $page_name == 'unit_report' || $page_name == 'fund_status' || $page_name == 'bill_report'){echo 'active';}?>"> <a href="#"> <i class="fa fa-bar-chart-o"></i> <span><?php echo $_data['menu_report'];?></span> <i class="fa fa-angle-left pull-right"></i> </a>
         <ul class="treeview-menu">
           <li class="<?php if($page_name != '' && $page_name == 'fair_report'){echo 'active';}?>"><a href="<?php echo WEB_URL; ?>report/fair_report.php"><i class="fa fa-arrow-circle-right"></i><?php echo $_data['menu_fair_report'];?></a></li>

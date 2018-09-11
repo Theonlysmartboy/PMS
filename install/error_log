@@ -1,6 +1,0 @@
-[12-Jan-2018 03:15:17 America/New_York] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2003] Can't connect to MySQL server on 'ariseandshinecarecenter.com' (111)' in /home/ariseand/public_html/Pms/install/index.php:26
-Stack trace:
-#0 /home/ariseand/public_html/Pms/install/index.php(26): PDO->__construct('mysql:host=aris...', 'ariseand_pmsadm...', 'Osck4[i?UBED%Tm...')
-#1 /home/ariseand/public_html/Pms/install/index.php(16): importDatabase('ariseandshineca...', 'ariseand_pms', 'ariseand_pmsadm...', 'Osck4[i?UBED%Tm...')
-#2 {main}
-  thrown in /home/ariseand/public_html/Pms/install/index.php on line 26

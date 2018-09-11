@@ -6,8 +6,8 @@
 			$html = '<option value="">--Select Unit--</option>';
 			if(isset($_POST['floor_no']) && (int)$_POST['floor_no'] > 0){
 				$unit_no = '';
-				$result = mysql_query("SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' and status = 0 order by unit_no asc",$link);
-				while($rows = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' and status = 0 order by unit_no asc");
+				while($rows = mysqli_fetch_array($result)){
 					$html .= '<option value="'.$rows['uid'].'">'.$rows['unit_no'] . '</option>';
 				}
 				echo $html;
@@ -20,8 +20,8 @@
 			$html = '<option value="">--Select Unit--</option>';
 			if(isset($_POST['floor_no']) && (int)$_POST['floor_no'] > 0){
 				$unit_no = '';
-				$result = mysql_query("SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' and status = 1 order by unit_no asc",$link);
-				while($rows = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' and status = 1 order by unit_no asc");
+				while($rows = mysqli_fetch_array($result)){
 					$html .= '<option value="'.$rows['uid'].'">'.$rows['unit_no'] . '</option>';
 				}
 				echo $html;
@@ -34,8 +34,8 @@
 			$html = '<option value="">--Select Unit--</option>';
 			if(isset($_POST['floor_no']) && (int)$_POST['floor_no'] > 0){
 				$unit_no = '';
-				$result = mysql_query("SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' order by unit_no asc",$link);
-				while($rows = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT * from tbl_add_unit where floor_no = '" . (int)$_POST['floor_no'] . "' order by unit_no asc");
+				while($rows = mysqli_fetch_array($result)){
 					$html .= '<option value="'.$rows['uid'].'">'.$rows['unit_no'] . '</option>';
 				}
 				echo $html;
@@ -51,8 +51,8 @@
 				'fair'	=> '0.00'
 			);
 			if(isset($_POST['floor_id']) && (int)$_POST['floor_id'] > 0 && isset($_POST['unit_id']) && (int)$_POST['unit_id'] > 0){
-				$result = mysql_query("SELECT * from tbl_add_rent where r_floor_no = '" . (int)$_POST['floor_id'] . "' and r_unit_no = '" . (int)$_POST['unit_id'] . "' and r_status = 1",$link);
-				if($rows = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT * from tbl_add_rent where r_floor_no = '" . (int)$_POST['floor_id'] . "' and r_unit_no = '" . (int)$_POST['unit_id'] . "' and r_status = 1");
+				if($rows = mysqli_fetch_array($result)){
 					$html = array(
 						'rid'	=> $rows['rid'],
 						'name'	=> $rows['r_name'],
@@ -69,8 +69,8 @@
 				'name'	=> ''
 			);
 			if(isset($_POST['unit_id']) && (int)$_POST['unit_id'] > 0){
-				$result = mysql_query("SELECT * from tbl_add_owner_unit_relation ur inner join tbl_add_owner ao on ao.ownid = ur.owner_id where ur.unit_id  = '" . (int)$_POST['unit_id'] . "'",$link);
-				if($rows = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"SELECT * from tbl_add_owner_unit_relation ur inner join tbl_add_owner ao on ao.ownid = ur.owner_id where ur.unit_id  = '" . (int)$_POST['unit_id'] . "'");
+				if($rows = mysqli_fetch_array($result)){
 					$html = array(
 						'ownid'	=> $rows['owner_id'],
 						'name'	=> $rows['o_name']
@@ -83,8 +83,8 @@
 		else if(isset($_POST['token']) && $_POST['token'] == 'getDesgInfo'){
 			$html = '';
 			if(isset($_POST['emp_id']) && (int)$_POST['emp_id'] > 0){
-				$result_emp = mysql_query("SELECT *,mt.member_type from tbl_add_employee e inner join tbl_add_member_type mt on mt.member_id = e.e_designation where eid = '" . (int)$_POST['emp_id'] . "'",$link);
-				if($row_emp = mysql_fetch_array($result_emp)){
+				$result_emp = mysqli_query($link,"SELECT *,mt.member_type from tbl_add_employee e inner join tbl_add_member_type mt on mt.member_id = e.e_designation where eid = '" . (int)$_POST['emp_id'] . "'");
+				if($row_emp = mysqli_fetch_array($result_emp)){
 					$html = $row_emp['member_type'];
 				}
 			}

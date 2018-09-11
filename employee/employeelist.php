@@ -12,7 +12,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_employee` WHERE eid = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -68,7 +68,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysqli_query($link,"SELECT *,mt.member_type FROM tbl_add_employee e inner join tbl_add_member_type mt");
+				$result = mysqli_query($link,"SELECT *,mt.member_type FROM tbl_add_employee e inner join tbl_add_member_type mt on e.e_designation = mt.member_id WHERE branch_id = '".(int)$_SESSION['objLogin']['branch_id']."'");
 				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 					if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){

@@ -7,8 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 	die();
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_visitor_info.php');
@@ -78,8 +78,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               </thead>
               <tbody>
             <?php
-			$result = mysql_query("Select *,fl.floor_no as fl_floor,u.unit_no,m.month_name from tbl_visitor v inner join tbl_add_floor fl on fl.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id inner join tbl_add_month_setup m on m.m_id = v.xmonth where v.issue_date='".$_GET['vid']."' and v.xmonth='".$_GET['mid']."' and v.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){
+			$result = mysqli_query($link,"Select *,fl.floor_no as fl_floor,u.unit_no,m.month_name from tbl_visitor v inner join tbl_add_floor fl on fl.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id inner join tbl_add_month_setup m on m.m_id = v.xmonth where v.issue_date='".$_GET['vid']."' and v.xmonth='".$_GET['mid']."' and v.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){
 				?>
                 <tr>
                   <td><?php echo $row['issue_date']; ?></td>
@@ -93,7 +93,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                   <td><?php echo $row['month_name']; ?></td>
                   <td><?php echo $row['xyear']; ?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <!--<tfoot>
                 <tr>

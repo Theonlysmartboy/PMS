@@ -15,17 +15,17 @@ if(isset($_POST['username']) && $_POST['username'] != ''){
 		$password = 'password';
 	}
 	else if($_POST['ddlLoginType'] == '2'){
-		//here for teacher
+		//here for owner
 		$sql= mysql_query($link,"SELECT * FROM tbl_add_owner WHERE o_email = '".make_safe($_POST['username'])."'");
 		$password = 'o_password';
 	}
 	else if($_POST['ddlLoginType'] == '3'){
-		//here for student
+		//here for employee
 		$sql= mysql_query($link,"SELECT * FROM tbl_add_employee WHERE e_email = '".make_safe($_POST['username'])."'");
 		$password = 'e_password';
 	}
 	else if($_POST['ddlLoginType'] == '4'){
-		//here for parent
+		//here for tennant
 		$sql= mysqli_query($link,"SELECT * FROM tbl_add_rent WHERE r_email = '".make_safe($_POST['username'])."'");
 		$password = 'r_password';
 	}

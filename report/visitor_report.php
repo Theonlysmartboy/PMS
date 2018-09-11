@@ -11,7 +11,7 @@ if(!isset($_SESSION['objLogin'])){
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sako Apartment Management System</title>
+<title>Property Management System</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -68,9 +68,9 @@ if(!isset($_SESSION['objLogin'])){
               </thead>
               <tbody>
             <?php
-			$result = mysql_query("select *Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id v.issue_date='".$_GET['idate']."' and v.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){
-				?>
+			$result = mysqli_query($link,"select *Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id v.issue_date='".$_GET['idate']."' and v.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){
+             ?>
                 <tr>
                   <td><?php echo $row['issue_date']; ?></td>
                   <td><?php echo $row['name']; ?></td>
@@ -80,7 +80,7 @@ if(!isset($_SESSION['objLogin'])){
                   <td><?php echo $row['intime']; ?></td>
 				  <td><?php echo $row['outtime']; ?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <tfoot>
                 <tr>

@@ -9,6 +9,8 @@ $v_date =  "";
 $month_id = "";
 $xyear = "";
 $button_text=$_data['submit'];
+$hdnid = '';
+$form_url = WEB_URL . "report/visitors_report.php";
 
 if(isset($_GET['issue_date'])){
 	$v_date = $_GET['issue_date'];
@@ -46,8 +48,8 @@ if(isset($_GET['xyear'])){
             <select name="ddlVDate" id="ddlVDate" class="form-control">
               <option value="">--<?php echo $_data['text_4'];?>--</option>
               <?php 
-			  $result_floor = mysql_query("SELECT * FROM tbl_visitor order by vid ASC",$link);
-					while($row_floor = mysql_fetch_array($result_floor)){?>
+			  $result_floor = mysqli_query($link,"SELECT * FROM tbl_visitor order by vid ASC");
+					while($row_floor = mysqli_fetch_array($result_floor)){?>
               <option <?php if($v_date == $row_floor['issue_date']){echo 'selected';}?> value="<?php echo $row_floor['issue_date'];?>"><?php echo $row_floor['issue_date'];?></option>
               <?php } ?>
             </select>
@@ -57,8 +59,8 @@ if(isset($_GET['xyear'])){
             <select name="ddlMonth" id="ddlMonth" class="form-control">
               <option value="">--<?php echo $_data['text_5'];?>--</option>
               <?php 
-				  	$result_month = mysql_query("SELECT * FROM tbl_add_month_setup order by m_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+				  	$result_month = mysqli_query($link,"SELECT * FROM tbl_add_month_setup order by m_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($month_id == $row_month['m_id']){echo 'selected';}?> value="<?php echo $row_month['m_id'];?>"><?php echo $row_month['month_name'];?></option>
               <?php } ?>
             </select>
@@ -68,8 +70,8 @@ if(isset($_GET['xyear'])){
             <select name="ddlYear" id="ddlYear" class="form-control">
               <option value="">--<?php echo $_data['text_6'];?>--</option>
               <?php 
-				  	$result_month = mysql_query("SELECT * FROM tbl_add_year_setup order by y_id ASC",$link);
-					while($row_month = mysql_fetch_array($result_month)){?>
+				  	$result_month = mysqli_query($link,"SELECT * FROM tbl_add_year_setup order by y_id ASC");
+					while($row_month = mysqli_fetch_array($result_month)){?>
               <option <?php if($xyear == $row_month['xyear']){echo 'selected';}?> value="<?php echo $row_month['xyear'];?>"><?php echo $row_month['xyear'];?></option>
               <?php } ?>
             </select>
@@ -86,7 +88,6 @@ if(isset($_GET['xyear'])){
   </div>
 </div>
 <!-- /.row -->
-
 <script type="text/javascript">
 	function getVisitorsInfo(){
 		var v_date = $("#ddlVDate").val();
@@ -118,5 +119,4 @@ if(isset($_GET['xyear'])){
 		}
 	}
 </script>
-
 <?php include('../footer.php'); ?>

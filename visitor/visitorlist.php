@@ -69,7 +69,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysqli_query("Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id where v.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fr.fid desc",$link);
+				$result = mysqli_query($link,"Select *,fr.floor_no,u.unit_no from tbl_visitor v inner join tbl_add_floor fr on fr.fid = v.floor_id inner join tbl_add_unit u on u.uid = v.unit_id where v.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by fr.fid desc");
 				while($row = mysqli_fetch_array($result)){?>
             <tr>
               <td><?php echo $row['issue_date']; ?></td>

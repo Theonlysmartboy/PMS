@@ -11,8 +11,8 @@ $global_currency = "$";
 $currency_position = "left";
 $currency_sep = ".";
 
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-while($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+while($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 	$global_currency = $row_query_ams_core['currency'];
 	$currency_position = $row_query_ams_core['currency_position'];
@@ -25,7 +25,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sako Apartment Management System</title>
+<title>Property Management System</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -99,8 +99,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 				$other_per_month_sub_total = 0;
 				$total_per_month_sub_total = 0;
 				
-				$result = mysql_query("select *,r.r_name,o.o_name,fl.floor_no,u.unit_no,m.month_name from tbl_add_fair f left join tbl_add_rent r on r.rid = f.rid left join tbl_add_owner o on o.ownid = f.rid inner join tbl_add_floor fl on fl.fid = f.floor_no inner join tbl_add_unit u on u.uid = f.unit_no inner join tbl_add_month_setup m on m.m_id = f.month_id where f.floor_no='".$_GET['fid']."' and f.unit_no='".$_GET['uid']."' and f.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"select *,r.r_name,o.o_name,fl.floor_no,u.unit_no,m.month_name from tbl_add_fair f left join tbl_add_rent r on r.rid = f.rid left join tbl_add_owner o on o.ownid = f.rid inner join tbl_add_floor fl on fl.fid = f.floor_no inner join tbl_add_unit u on u.uid = f.unit_no inner join tbl_add_month_setup m on m.m_id = f.month_id where f.floor_no='".$_GET['fid']."' and f.unit_no='".$_GET['uid']."' and f.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){
 				$rent_per_month_sub_total +=(float)$row['rent'];
 				$gas_per_month_sub_total +=(float)$row['gas_bill'];
 				$electric_per_month_sub_total +=(float)$row['electric_bill'];
@@ -158,7 +158,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                     <td><?php echo $row['total_rent'].$global_currency; ?></h3>
                     <?php } ?>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <tfoot>
                 <tr>

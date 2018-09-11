@@ -8,8 +8,8 @@ if($_SESSION['login_type'] != '4'){
 	die();
 }
 $total_rent = 0;
-$result_amount = mysql_query("SELECT sum(rent) as total FROM tbl_add_fair where rid =".(int)$_SESSION['objLogin']['rid'],$link);
-if($row_amount_total = mysql_fetch_array($result_amount)){
+$result_amount = mysqli_query($link,"SELECT sum(rent) as total FROM tbl_add_fair where rid =".(int)$_SESSION['objLogin']['rid']);
+if($row_amount_total = mysqli_fetch_array($result_amount)){
 	$total_rent = $row_amount_total['total'];
 }
 ?>

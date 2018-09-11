@@ -11,8 +11,8 @@ $global_currency = "$";
 $currency_position = "left";
 $currency_sep = ".";
 
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-while($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+while($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 	$global_currency = $row_query_ams_core['currency'];
 	$currency_position = $row_query_ams_core['currency_position'];
@@ -26,7 +26,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sako Apartment Management System</title>
+<title>Property Management System</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -84,8 +84,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               <tbody>
                 <?php
 			$fund_sub_total = 0;
-			$result = mysql_query("Select *,ow.o_name,ow.image,m.month_name,y.xyear as y_xyear from tbl_add_fund fu inner join tbl_add_owner ow on ow.ownid = fu.owner_id inner join tbl_add_month_setup m on m.m_id = fu.month_id inner join tbl_add_year_setup y on y.y_id = fu.xyear where fu.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "' order by fu.fund_id desc",$link);
-			while($row = mysql_fetch_array($result)){
+			$result = mysqli_query($link,"Select *,ow.o_name,ow.image,m.month_name,y.xyear as y_xyear from tbl_add_fund fu inner join tbl_add_owner ow on ow.ownid = fu.owner_id inner join tbl_add_month_setup m on m.m_id = fu.month_id inner join tbl_add_year_setup y on y.y_id = fu.xyear where fu.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "' order by fu.fund_id desc");
+			while($row = mysqli_fetch_array($result)){
 				$fund_sub_total +=(float)$row['total_amount'];
 				$image = WEB_URL . 'img/no_image.jpg';	
 				if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){
@@ -105,7 +105,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                   <?php } ?>
                   <td><?php echo $row['purpose']; ?></td>
                 </tr>
-                <?php } //mysql_close($link); ?>
+                <?php } //mysqli_close($link); ?>
               </tbody>
               <tfoot>
                 <tr>
@@ -146,8 +146,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               <tbody>
                 <?php
 				$cost_sub_total = 0;
-				$result_cost = mysql_query("Select * from tbl_add_maintenance_cost order by mcid desc",$link);
-				while($row_cost = mysql_fetch_array($result_cost)){
+				$result_cost = mysqli_query($link,"Select * from tbl_add_maintenance_cost order by mcid desc");
+				while($row_cost = mysqli_fetch_array($result_cost)){
 				$cost_sub_total +=(float)$row_cost['m_amount'];
 				?>
               <td><?php echo $row_cost['m_title']; ?></td>
@@ -159,7 +159,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                 <?php } ?>
                 <td><?php echo $row_cost['m_details']; ?></td>
               </tr>
-              <?php } //mysql_close($link); ?>
+              <?php } //mysqli_close($link); ?>
               </tbody>
               
               <tfoot>

@@ -1,7 +1,7 @@
 <?php
 //Website Menu Language Conversion
 //English Package
-//copyright: otema.com
+//copyright: otemainc.com
 
 $_data['text_1'] 		= "Add Branch";
 $_data['text_1_1'] 		= "Update Branch";

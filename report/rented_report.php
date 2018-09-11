@@ -7,6 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 }
 $r_status =  "";
 $button_text=$_data['submit'];
+$hdnid = '';
+$form_url = WEB_URL . "report/rented_report.php";
 
 if(isset($_GET['ddlRStatus'])){
 	$r_status = $_GET['ddlRStatus'];

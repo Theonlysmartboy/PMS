@@ -7,8 +7,8 @@ if(!isset($_SESSION['objLogin'])){
 	die();
 }
 $lang_code_global = "English";
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-if($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+if($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 }
 include(ROOT_PATH.'language/'.$lang_code_global.'/lang_owner_info_all.php');
@@ -18,7 +18,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sako Apartment Management System</title>
+<title>Property Management System</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="<?php echo WEB_URL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -81,8 +81,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               </thead>
               <tbody>
                 <?php
-			$result = mysql_query("Select *,u.unit_no as u_unit,fr.floor_no as fl_floor,m.month_name,w.o_name from tbl_add_owner_utility ou inner join tbl_add_unit u on ou.unit_no = u.uid inner join tbl_add_floor fr on ou.floor_no = fr.fid inner join tbl_add_owner_unit_relation orl on orl.unit_id = ou.unit_no inner join tbl_add_owner w on w.ownid = orl.owner_id inner join tbl_add_month_setup m on m.m_id = ou.month_id where ou.floor_no='".$_GET['fid']."' and ou.unit_no='".$_GET['uid']."' and ou.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){?>
+			$result = mysqli_query($link,"Select *,u.unit_no as u_unit,fr.floor_no as fl_floor,m.month_name,w.o_name from tbl_add_owner_utility ou inner join tbl_add_unit u on ou.unit_no = u.uid inner join tbl_add_floor fr on ou.floor_no = fr.fid inner join tbl_add_owner_unit_relation orl on orl.unit_id = ou.unit_no inner join tbl_add_owner w on w.ownid = orl.owner_id inner join tbl_add_month_setup m on m.m_id = ou.month_id where ou.floor_no='".$_GET['fid']."' and ou.unit_no='".$_GET['uid']."' and ou.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){?>
                 <tr>
                   <td><?php echo $row['o_name']; ?></td>
                   <td><?php echo $row['fl_floor']; ?></td>
@@ -98,7 +98,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                   <td><?php echo $row['total_rent'].' '.CURRENCY; ?></td>
                   <td><?php echo $row['issue_date']; ?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <tfoot>
                 <!--<tr>

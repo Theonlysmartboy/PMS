@@ -11,8 +11,8 @@ $global_currency = "$";
 $currency_position = "left";
 $currency_sep = ".";
 
-$query_ams_settings = mysql_query("SELECT * FROM tbl_settings",$link);
-while($row_query_ams_core = mysql_fetch_array($query_ams_settings)){
+$query_ams_settings = mysqli_query($link,"SELECT * FROM tbl_settings");
+while($row_query_ams_core = mysqli_fetch_array($query_ams_settings)){
 	$lang_code_global = $row_query_ams_core['lang_code'];
 	$global_currency = $row_query_ams_core['currency'];
 	$currency_position = $row_query_ams_core['currency_position'];
@@ -80,8 +80,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
               </thead>
               <tbody>
             <?php
-			$result = mysql_query("Select *,m.month_name from tbl_add_complain c inner join tbl_add_month_setup m on m.m_id = c.c_month where c.c_date='".$_GET['vid']."' and c.c_month='".$_GET['mid']."' and c.c_year='".$_GET['yid']."' and c.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'",$link);
-				while($row = mysql_fetch_array($result)){
+			$result = mysqli_query($link,"Select *,m.month_name from tbl_add_complain c inner join tbl_add_month_setup m on m.m_id = c.c_month where c.c_date='".$_GET['vid']."' and c.c_month='".$_GET['mid']."' and c.c_year='".$_GET['yid']."' and c.branch_id = '" . (int)$_SESSION['objLogin']['branch_id'] . "'");
+				while($row = mysqli_fetch_array($result)){
 				?>
                 <tr>
                   <td><?php echo $row['c_date']; ?></td>
@@ -90,7 +90,7 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
                   <td><?php echo $row['c_title']; ?></td>
                   <td><?php echo $row['c_description']; ?></td>
                 </tr>
-                <?php } mysql_close($link); ?>
+                <?php } mysqli_close($link); ?>
               </tbody>
               <!--<tfoot>
                 <tr>

@@ -11,7 +11,7 @@ $addinfo = 'none';
 $msg = "";
 if(isset($_GET['id']) && $_GET['id'] != '' && $_GET['id'] > 0){
 	$sqlx= "DELETE FROM `tbl_add_rent` WHERE rid = ".$_GET['id'];
-	mysql_query($sqlx,$link); 
+	mysqli_query($link,$sqlx); 
 	$delinfo = 'block';
 }
 if(isset($_GET['m']) && $_GET['m'] == 'add'){
@@ -68,8 +68,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
           </thead>
           <tbody>
             <?php
-				$result = mysql_query("Select *,f.floor_no as ffloor,u.unit_no from tbl_add_rent r inner join tbl_add_floor f on f.fid = r.r_floor_no inner join tbl_add_unit u on u.uid = r.r_unit_no where r.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by r.r_unit_no asc",$link);
-				while($row = mysql_fetch_array($result)){
+				$result = mysqli_query($link,"Select *,f.floor_no as ffloor,u.unit_no from tbl_add_rent r inner join tbl_add_floor f on f.fid = r.r_floor_no inner join tbl_add_unit u on u.uid = r.r_unit_no where r.branch_id = " . (int)$_SESSION['objLogin']['branch_id'] . " order by r.r_unit_no asc");
+				while($row = mysqli_fetch_array($result)){
 					$image = WEB_URL . 'img/no_image.jpg';	
 					if(file_exists(ROOT_PATH . '/img/upload/' . $row['image']) && $row['image'] != ''){
 						$image = WEB_URL . 'img/upload/' . $row['image'];
@@ -129,7 +129,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
                   </div>
                 </div></td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

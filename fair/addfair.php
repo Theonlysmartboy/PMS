@@ -35,14 +35,14 @@ $rid = 0;
 if(isset($_POST['txtRent'])){
 	if(isset($_POST['hdn']) && $_POST['hdn'] == '0'){
 	$sql = "INSERT INTO tbl_add_fair(type,floor_no,unit_no,rid,month_id,xyear,rent,water_bill,electric_bill,gas_bill,security_bill,utility_bill,other_bill,total_rent,issue_date,branch_id) values('$type','$_POST[ddlFloorNo]','$_POST[ddlUnitNo]','$_POST[hdnRentedId]','$_POST[ddlMonth]','$xyear','$_POST[txtRent]','$_POST[txtWaterBill]','$_POST[txtElectricBill]','$_POST[txtGasBill]','$_POST[txtSecurityBill]','$_POST[txtUtilityBill]','$_POST[txtOtherBill]','$_POST[txtTotalRent]','$_POST[txtIssueDate]','" . $_SESSION['objLogin']['branch_id'] . "')";
-	mysql_query($sql,$link);
-	mysql_close($link);
+	mysqli_query($link,$sql);
+	mysqli_close($link);
 	$url = WEB_URL . 'fair/fairlist.php?m=add';
 	header("Location: $url");
 }
 else{
 	$sql = "UPDATE `tbl_add_fair` SET `floor_no`='".$_POST['ddlFloorNo']."',`unit_no`='".$_POST['ddlUnitNo']."',`rid`='".$_POST['hdnRentedId']."',`month_id`='".$_POST['ddlMonth']."',`xyear`='".$xyear."',`rent`='".$_POST['txtRent']."',`water_bill`='".$_POST['txtWaterBill']."',`electric_bill`='".$_POST['txtElectricBill']."',`gas_bill`='".$_POST['txtGasBill']."',`security_bill`='".$_POST['txtSecurityBill']."',`utility_bill`='".$_POST['txtUtilityBill']."',`other_bill`='".$_POST['txtOtherBill']."',`total_rent`='".$_POST['txtTotalRent']."',`issue_date`='".$_POST['txtIssueDate']."' WHERE f_id='".$_GET['id']."'";
-	mysql_query($sql,$link);
+	mysqli_query($link,$sql);
 	$url = WEB_URL . 'fair/fairlist.php?m=up';
 	header("Location: $url");
 	}
@@ -50,8 +50,8 @@ else{
 }
 
 if(isset($_GET['id']) && $_GET['id'] != ''){
-	$result = mysql_query("SELECT *,r.r_name,r.rid FROM tbl_add_fair af inner join tbl_add_rent r on r.rid = af.rid where af.f_id = '" . $_GET['id'] . "' and af.type='Rented'",$link);
-	while($row = mysql_fetch_array($result)){
+	$result = mysqli_query($link,"SELECT *,r.r_name,r.rid FROM tbl_add_fair af inner join tbl_add_rent r on r.rid = af.rid where af.f_id = '" . $_GET['id'] . "' and af.type='Rented'");
+	while($row = mysqli_fetch_array($result)){
 		
 		$floor_no = $row['floor_no'];
 		$unit_no = $row['unit_no'];
@@ -74,7 +74,7 @@ if(isset($_GET['id']) && $_GET['id'] != ''){
 		$form_url = WEB_URL . "fair/addfair.php?id=".$_GET['id'];
 	}
 	
-	//mysql_close($link);
+	//mysqli_close($link);
 }
 else{
 	//

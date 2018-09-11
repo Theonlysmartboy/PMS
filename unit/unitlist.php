@@ -111,6 +111,8 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
                             <tr>
                                 <th><?php echo $_data['floor_no']; ?></th>
                                 <th><?php echo $_data['unit_no']; ?></th>
+                                <th><?php echo "Size"; ?></th>
+                                <th><?php echo "Status"; ?></th>
                                 <th><?php echo $_data['action_text']; ?></th>
                             </tr>
                         </tfoot>

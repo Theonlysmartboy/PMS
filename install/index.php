@@ -131,8 +131,8 @@ function home_base_url(){
 </div>
 <br/>
 <br/>
-<div align="center"><a target="_blank" href="http://optimumlinkup.com.ng" style="text-decoration:none;color:#000;font-size:13px;">Copyright &copy; <script>var d = new Date();
+<div align="center"><a target="_blank" href="http://otemainc.com" style="text-decoration:none;color:#000;font-size:13px;">Copyright &copy; <script>var d = new Date();
                 var n = d.getFullYear();
-                document.write(n);</script> Otema All rights reserved. </a></div>
+                document.write(n);</script> Otema<sup>TM</sup></a> All rights reserved.</div>
 </body>
 </html>
