@@ -17,6 +17,7 @@ $_data['add_new_form_field_text_9'] = "Preview";
 $_data['add_new_form_field_text_10'] = "Floor";
 $_data['add_new_form_field_text_11'] = "Select Floor";
 $_data['add_new_form_field_text_12'] = "Select Floor First";
+$_data['add_new_form_field_text_13'] = "Image";
 $_data['add_new_owner_information_breadcam'] = "Owner Information";
 $_data['add_new_owner_breadcam'] = "Add Owner";
 $_data['added_owner_successfully'] = "Added Owner Information Successfully";

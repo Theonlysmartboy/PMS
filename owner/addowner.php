@@ -182,12 +182,13 @@ function NewGuid() {
                                 $result_unit = mysqli_query($link, "Select * from tbl_add_unit where branch_id = " . (int) $_SESSION['objLogin']['branch_id'] . " order by uid asc");
                                 while ($row_unit = mysqli_fetch_array($result_unit)) {
                                     ?>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form" name="ChkOwnerUnit" value="<?php echo $row_unit['uid']; ?>"><?php echo $row_unit['unit_no']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form" name="ChkOwnerUnit" value="<?php echo $row_unit['uid']; ?>" /><?php echo $row_unit['unit_no']; ?>
                                 <?php } ?>
                             </div>
                             <div class="form-group">
-                                <label for=""
-                            </div>
+                                <label for="img_exist"><?php echo $_data['add_new_form_field_text_13']; ?> </label>
+                                <input type="file" accept="image/png, image/jpeg" name="img_exist" id="img_exist"/>
+                                                       </div>
                             <div class="form-group pull-right">
                                 <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
                             </div>
