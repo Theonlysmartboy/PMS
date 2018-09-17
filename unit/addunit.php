@@ -92,7 +92,7 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'view') {
                                 <label for="txtUnit"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
                                 <input type="text" name="txtUnit" id="txtUnit" class="form-control" />
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="txtSize"><?php echo $_data['add_new_form_field_text_3']; ?> :</label>
                                 <input type="text" name="txtSize" id="txtSize" class="form-control" />
                             </div>

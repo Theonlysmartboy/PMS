@@ -30,38 +30,51 @@ $id = "";
 $hdnid = "0";
 $image_rnt = WEB_URL . 'img/no_image.jpg';
 $img_track = '';
-
+$password = 'owner@vidic%Pms';
+$r_gone_date = '';
 if (isset($_POST['txtRName'])) {
     if (isset($_POST['hdn']) && $_POST['hdn'] == '0') {
         $r_password = $_POST['txtPassword'];
         $image_url = uploadImage();
-        if (isset($_POST['chkRStaus'])) {
+        if (isset($_POST['chkRStatus'])) {
             $r_status = 1;
         }
-        $sql = "INSERT INTO tbl_add_rent(r_name,r_email,r_contact,r_address,r_nid,r_floor_no,r_unit_no,r_advance,r_rent_pm,r_date,r_month,r_year,r_password,r_status,image,branch_id) values('$_POST[txtRName]','$_POST[txtREmail]','$_POST[txtRContact]','$_POST[txtRAddress]','$_POST[txtRentedNID]','$_POST[ddlFloorNo]','$_POST[ddlUnitNo]','$_POST[txtRAdvance]','$_POST[txtRentPerMonth]','$_POST[txtRDate]','$_POST[ddlMonth]','$_POST[ddlYear]','$r_password','$r_status','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
-        mysqli_query($link, $sql);
-        //update unit status
-        $sqlx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) $_POST['ddlFloorNo'] . "' and uid = '" . (int) $_POST['ddlUnitNo'] . "'";
-        mysqli_query($link, $sqlx);
-        ////////////////////////
-        mysqli_close($link);
-        $url = WEB_URL . 'rent/rentlist.php?m=add';
-        header("Location: $url");
+        $sql = "INSERT INTO tbl_add_rent(r_name,r_email,r_contact,r_address,r_nid,r_floor_no,r_unit_no,r_advance,r_rent_pm,r_date,r_month,r_year,r_gone_date,r_password,r_status,image,branch_id) values('$_POST[txtRName]','$_POST[txtREmail]','$_POST[txtRContact]','$_POST[txtRAddress]','$_POST[txtRentedNID]','$_POST[ddlFloorNo]','$_POST[ddlUnitNo]','$_POST[txtRAdvance]','$_POST[txtRentPerMonth]','$_POST[txtRDate]','$_POST[ddlMonth]','$_POST[ddlYear]','$_POST[txtRExpiry]','$r_password','$r_status','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
+        if (mysqli_query($link, $sql)) {
+            //update unit status
+            $sqlx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) $_POST['ddlFloorNo'] . "' and uid = '" . (int) $_POST['ddlUnitNo'] . "'";
+            if (mysqli_query($link, $sqlx)) {
+                ////////////////////////
+                mysqli_close($link);
+                $url = WEB_URL . 'rent/rentlist.php?m=add';
+                header("Location: $url");
+            } else {
+                echo("Error description: " . mysqli_error($link));
+                $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
+                error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
+                exit();
+            }
+        } else {
+            echo("Error description: " . mysqli_error($link));
+            $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
+            error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
+            exit();
+        }
     } else {
         $image_url = uploadImage();
         if ($image_url == '') {
             $image_url = $_POST['img_exist'];
         }
-        if (isset($_POST['chkRStaus'])) {
+        if (isset($_POST['chkRStatus'])) {
             $r_status = 1;
         }
         $sql = "UPDATE `tbl_add_rent` SET `r_name`='" . $_POST['txtRName'] . "',`r_email`='" . $_POST['txtREmail'] . "',`r_password`='" . $_POST['txtPassword'] . "',`r_contact`='" . $_POST['txtRContact'] . "',`r_address`='" . $_POST['txtRAddress'] . "',`r_nid`='" . $_POST['txtRentedNID'] . "',`r_floor_no`='" . $_POST['ddlFloorNo'] . "',`r_unit_no`='" . $_POST['ddlUnitNo'] . "',`r_advance`='" . $_POST['txtRAdvance'] . "',`r_rent_pm`='" . $_POST['txtRentPerMonth'] . "',`r_date`='" . $_POST['txtRDate'] . "',`r_month`='" . $_POST['ddlMonth'] . "',`r_year`='" . $_POST['ddlYear'] . "',`r_status`='" . $r_status . "',`image`='" . $image_url . "' WHERE rid='" . $_GET['id'] . "'";
-        mysqli_query($link,$sql);
+        mysqli_query($link, $sql);
         //update unit status
         $sqlx = "UPDATE `tbl_add_unit` set status = 0 where floor_no = '" . (int) $_POST['hdnFloor'] . "' and uid = '" . (int) $_POST['hdnUnit'] . "'";
-        mysqli_query($link,$sqlx);
+        mysqli_query($link, $sqlx);
         $sqlxx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) $_POST['ddlFloorNo'] . "' and uid = '" . (int) $_POST['ddlUnitNo'] . "'";
-        mysqli_query($link,$sqlxx);
+        mysqli_query($link, $sqlxx);
         ///////////////////////////////////////////
         $url = WEB_URL . 'rent/rentlist.php?m=up';
         header("Location: $url");
@@ -71,7 +84,7 @@ if (isset($_POST['txtRName'])) {
 }
 
 if (isset($_GET['id']) && $_GET['id'] != '') {
-    $result = mysqli_query($link,"SELECT * FROM tbl_add_rent where rid = '" . $_GET['id'] . "'");
+    $result = mysqli_query($link, "SELECT * FROM tbl_add_rent where rid = '" . $_GET['id'] . "'");
     while ($row = mysqli_fetch_array($result)) {
         $r_name = $row['r_name'];
         $r_email = $row['r_email'];
@@ -147,71 +160,216 @@ function NewGuid() {
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title"><?php echo $_data['add_new_renter_entry_form']; ?></h3>
+                    <form onSubmit="return validateMe();" action="<?php echo $form_url; ?>" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="txtRName"><?php echo $_data['add_new_form_field_text_1']; ?> :</label>
+                                <input type="text" name="txtRName" id="txtRName" class="form-control" />
+                            </div> 
+                            <div class="form-group">
+                                <label for="txtREmail"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
+                                <input type="email" name="txtREmail" id="txtREmail" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRContact"><?php echo $_data['add_new_form_field_text_4']; ?> :</label>
+                                <input type="text" name="txtRContact" id="txtRContact" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRAddress"><?php echo $_data['add_new_form_field_text_5']; ?> :</label>
+                                <input type="text" name="txtRAddress" id="txtRAddress" class="form-control" />
+                            </div> 
+                            <div class="form-group">
+                                <label for="txtRentedNID"><?php echo $_data['add_new_form_field_text_6']; ?> :</label>
+                                <input type="text" name="txtRentedNID" id="txtRentedNID" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlFloorNo"><?php echo $_data['add_new_form_field_text_7']; ?> :</label>
+                                <select onchange="getUnitReport(this.value)" name="ddlFloorNo" id="ddlFloorNo" class="form-control">
+                                    <option value="">--<?php echo $_data['add_new_form_field_text_7']; ?>--</option>
+                                    <?php
+                                    $result_floor = mysqli_query($link, "SELECT * FROM tbl_add_floor order by fid ASC");
+                                    while ($row_floor = mysqli_fetch_array($result_floor)) {
+                                        ?>
+                                        <option <?php
+                                        if ($r_floor_no == $row_floor['fid']) {
+                                            echo 'selected';
+                                        }
+                                        ?> value="<?php echo $row_floor['fid']; ?>">
+                                            <?php echo $row_floor['floor_no']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlUnitNo"><?php echo $_data['add_new_form_field_text_8']; ?> :</label>
+                                <select name="ddlUnitNo" id="ddlUnitNo" class="form-control">
+                                    <option value="">--<?php echo $_data['add_new_form_field_text_8']; ?>--</option>
+                                    <?php
+                                    $result_unit = mysqli_query($link, "SELECT * FROM tbl_add_unit where floor_no ='" . (int) $row_floor['fid'] . "' order by uid ASC");
+                                    while ($row_unit = mysqli_fetch_array($result_unit)) {
+                                        ?>
+                                        <option <?php
+                                        if ($unit_id == $row_unit['uid']) {
+                                            echo 'selected';
+                                        }
+                                        ?> value="<?php echo $row_unit['uid']; ?>"><?php echo $row_unit['unit_no']; ?></option>
+                                        <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRAddvance"><?php echo $_data['add_new_form_field_text_9']; ?> :</label>
+                                <input type="text" name="txtRAdvance" id="txtRAdvance" class="form-control" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRentPerMonth"><?php echo $_data['add_new_form_field_text_10']; ?> :</label>
+                                <input type="text" name="txtRentPerMonth" id="txtRentPerMonth" class="form-control" required="required" placeholder="00.00"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRDate"><?php echo $_data['add_new_form_field_text_11']; ?> :</label>
+                                <div class='input-group date' id='datetimepicker10'>
+                                    <input type='text' class="form-control" name="txtRDate" id="txtRDate" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar">
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#datetimepicker10').datepicker({
+                                        viewMode: 'years',
+                                        format: 'dd/mm/yyyy'
+                                    });
+                                });
+                            </script>
+                            <div class="form-group">
+                                <label for="ddlMonth"><?php echo $_data['add_new_form_field_text_12']; ?> :</label>
+                                <select name="ddlMonth" id="ddlMonth" class="form-control">
+                                    <option value="">--<?php echo $_data['add_new_form_field_text_12']; ?>--</option>
+                                    <?php
+                                    $result_month = mysqli_query($link, "SELECT * FROM tbl_add_month_setup order by m_id ASC");
+                                    while ($row_month = mysqli_fetch_array($result_month)) {
+                                        ?>
+                                        <option <?php
+                                        if ($r_month == $row_month['m_id']) {
+                                            echo 'selected';
+                                        }
+                                        ?> value="<?php echo $row_month['m_id']; ?>"><?php echo $row_month['month_name']; ?></option><?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlYear"><?php echo $_data['add_new_form_field_text_13']; ?> :</label>
+                                <select name="ddlYear" id="ddlYear" class="form-control">
+                                    <option value="">--<?php echo $_data['add_new_form_field_text_13']; ?>--</option>
+                                    <?php
+                                    $result_month = mysqli_query($link, "SELECT * FROM tbl_add_year_setup order by y_id ASC");
+                                    while ($row_month = mysqli_fetch_array($result_month)) {
+                                        ?>
+                                        <option <?php
+                                        if ($r_year == $row_month['xyear']) {
+                                            echo 'selected';
+                                        }
+                                        ?> value="<?php echo $row_month['y_id']; ?>"><?php echo $row_month['xyear']; ?></option><?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPassword"><?php echo $_data['add_new_form_field_text_3']; ?> :</label>
+                                <input type="password" name="txtPassword" id="txtPassword" class="form-control" value="<?php echo $password; ?>" required="required" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label for="chkRStatus"><?php echo $_data['add_new_form_field_text_14']; ?> :</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkRStatus" value="0"><?php echo $_data['add_new_form_field_text_16']; ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkRStatus" value="1"><?php echo $_data['add_new_form_field_text_17']; ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRExpiry"><?php echo $_data['add_new_form_field_text_18']; ?> :</label>
+                                <div class='input-group date' id='datetimepicker11'>
+                                    <input type='text' class="form-control" name="txtRExpiry" id="txtRExpiry" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar">
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#datetimepicker11').datepicker({
+                                        viewMode: 'years',
+                                        format: 'dd/mm/yyyy'
+                                    });
+                                });
+                            </script>
+                            <div class="form-group pull-right">
+                                <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
+                            </div>
+                        </div>
+                        <input type="hidden" value="<?php echo $hdnid; ?>" name="hdn"/>
+                    </form>
                 </div>
-
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
+
+            <!-- /.box-body -->
         </div>
+        <!-- /.box -->
     </div>
-    <!-- /.row -->
-    <script type="text/javascript">
-        function validateMe() {
-            if ($("#txtRName").val() == '') {
-                alert("Rented Name Required !!!");
-                $("#txtRName").focus();
-                return false;
-            } else if ($("#txtREmail").val() == '') {
-                alert("Email Required !!!");
-                $("#txtREmail").focus();
-                return false;
-            } else if ($("#txtPassword").val() == '') {
-                alert("Password Required !!!");
-                $("#txtPassword").focus();
-                return false;
-            } else if ($("#txtRContact").val() == '') {
-                alert("Contact Number Required !!!");
-                $("#txtRContact").focus();
-                return false;
-            } else if ($("#txtRAddress").val() == '') {
-                alert("Address Required !!!");
-                $("#txtRAddress").focus();
-                return false;
-            } else if ($("#txtRentedNID").val() == '') {
-                alert("NID Required !!!");
-                $("#txtRentedNID").focus();
-                return false;
-            } else if ($("#ddlFloorNo").val() == '') {
-                alert("Floor Required !!!");
-                $("#ddlFloorNo").focus();
-                return false;
-            } else if ($("#ddlUnitNo").val() == '') {
-                alert("Unit Required !!!");
-                $("#ddlUnitNo").focus();
-                return false;
-            } else if ($("#txtRAdvance").val() == '') {
-                alert("Advance Rent Required !!!");
-                $("#txtRAdvance").focus();
-                return false;
-            } else if ($("#txtRentPerMonth").val() == '') {
-                alert("Rent Per Month Required !!!");
-                $("#txtRentPerMonth").focus();
-                return false;
-            } else if ($("#txtRDate").val() == '') {
-                alert("Rent Date Required !!!");
-                $("#txtRDate").focus();
-                return false;
-            } else if ($("#ddlMonth").val() == '') {
-                alert("Rented Month Required !!!");
-                $("#ddlMonth").focus();
-                return false;
-            } else if ($("#ddlYear").val() == '') {
-                alert("Rented Year Required !!!");
-                $("#ddlYear").focus();
-                return false;
-            } else {
-                return true;
-            }
+</div>
+<!-- /.row -->
+<script type="text/javascript">
+    function validateMe() {
+        if ($("#txtRName").val() == '') {
+            alert("Rented Name Required !!!");
+            $("#txtRName").focus();
+            return false;
+        } else if ($("#txtREmail").val() == '') {
+            alert("Email Required !!!");
+            $("#txtREmail").focus();
+            return false;
+        } else if ($("#txtPassword").val() == '') {
+            alert("Password Required !!!");
+            $("#txtPassword").focus();
+            return false;
+        } else if ($("#txtRContact").val() == '') {
+            alert("Contact Number Required !!!");
+            $("#txtRContact").focus();
+            return false;
+        } else if ($("#txtRAddress").val() == '') {
+            alert("Address Required !!!");
+            $("#txtRAddress").focus();
+            return false;
+        } else if ($("#txtRentedNID").val() == '') {
+            alert("NID Required !!!");
+            $("#txtRentedNID").focus();
+            return false;
+        } else if ($("#ddlFloorNo").val() == '') {
+            alert("Floor Required !!!");
+            $("#ddlFloorNo").focus();
+            return false;
+        } else if ($("#ddlUnitNo").val() == '') {
+            alert("Unit Required !!!");
+            $("#ddlUnitNo").focus();
+            return false;
+        } else if ($("#txtRAdvance").val() == '') {
+            alert("Advance Rent Required !!!");
+            $("#txtRAdvance").focus();
+            return false;
+        } else if ($("#txtRentPerMonth").val() == '') {
+            alert("Rent Per Month Required !!!");
+            $("#txtRentPerMonth").focus();
+            return false;
+        } else if ($("#txtRDate").val() == '') {
+            alert("Rent Date Required !!!");
+            $("#txtRDate").focus();
+            return false;
+        } else if ($("#ddlMonth").val() == '') {
+            alert("Rented Month Required !!!");
+            $("#ddlMonth").focus();
+            return false;
+        } else if ($("#ddlYear").val() == '') {
+            alert("Rented Year Required !!!");
+            $("#ddlYear").focus();
+            return false;
+        } else {
+            return true;
         }
-    </script>
+    }
+</script>
 <?php include('../footer.php'); ?>

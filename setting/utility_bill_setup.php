@@ -42,7 +42,7 @@ $success = "block";
 }
 
 if(isset($_GET['spid']) && $_GET['spid'] != ''){
-		$result_location = mysql_query($link,"SELECT * FROM tbl_add_utility_bill where utility_id= '" . (int)$_GET['spid'] . "'");
+		$result_location = mysqli_query($link,"SELECT * FROM tbl_add_utility_bill where utility_id= '" . (int)$_GET['spid'] . "'");
 		if($row = mysqli_fetch_array($result_location)){
 		 	$gas_bill = $row['gas_bill'];
 			$security_bill = $row['security_bill'];

@@ -64,10 +64,8 @@ include(ROOT_PATH.'language/'.$lang_code_global.'/lang_common.php');
 <link href="<?php echo WEB_URL; ?>dist/css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo WEB_URL; ?>plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- alertify core styles -->
-<link rel="stylesheet" href="<?php echo WEB_URL; ?>assets/alertify/themes/alertify.core.css" />
-<!-- alertify theme, can be included into the core instead of 2 separate files -->
-<link rel="stylesheet" href="<?php echo WEB_URL; ?>assets/alertify/themes/alertify.default.css" />
+<!-- jQuery 2.1.4 -->
+<script src="<?php echo WEB_URL; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

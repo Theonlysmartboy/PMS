@@ -135,7 +135,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
             </div>
             </td>
             </tr>
-            <?php } mysql_close($link); ?>
+            <?php } mysqli_close($link); ?>
           </tbody>
         </table>
       </div>

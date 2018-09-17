@@ -56,8 +56,8 @@ if (isset($_GET['mid'])) {
                                         echo 'selected';
                                     }
                                     ?> value="<?php echo $row_floor['fid']; ?>">
-    <?php echo $row_floor['floor_no']; ?></option>
-<?php } ?>
+                                        <?php echo $row_floor['floor_no']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -69,11 +69,11 @@ if (isset($_GET['mid'])) {
                                 while ($row_unit = mysqli_fetch_array($result_unit)) {
                                     ?>
                                     <option <?php
-                                        if ($unit_id == $row_unit['uid']) {
-                                            echo 'selected';
-                                        }
-                                        ?> value="<?php echo $row_unit['uid']; ?>"><?php echo $row_unit['unit_no']; ?></option>
-<?php } ?>
+                                    if ($unit_id == $row_unit['uid']) {
+                                        echo 'selected';
+                                    }
+                                    ?> value="<?php echo $row_unit['uid']; ?>"><?php echo $row_unit['unit_no']; ?></option>
+                                    <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -89,7 +89,7 @@ if (isset($_GET['mid'])) {
                                         echo 'selected';
                                     }
                                     ?> value="<?php echo $row_month['m_id']; ?>"><?php echo $row_month['month_name']; ?></option>
-<?php } ?>
+                                    <?php } ?>
                             </select>
                         </div>
                         <div class="form-group pull-right">
@@ -112,7 +112,7 @@ if (isset($_GET['mid'])) {
             var month_id = $("#ddlMonth").val();
 
             if (floor_id != '' && unit_id != '' && month_id != '') {
-                //window.location = "<?php //echo WEB_URL;  ?>report/mark_info.php?cid=" + class_id + '&eid=' + exam_id + '&sbid=' + subject_id;
+                //window.location = "<?php //echo WEB_URL;   ?>report/mark_info.php?cid=" + class_id + '&eid=' + exam_id + '&sbid=' + subject_id;
                 window.open('<?php echo WEB_URL; ?>report/fair_info_all.php?fid=' + floor_id + '&uid=' + unit_id + '&mid=' + month_id, '_blank');
             } else if (floor_id != '' && unit_id != '') {
                 window.open('<?php echo WEB_URL; ?>report/fair_info_floor_unit.php?fid=' + floor_id + '&uid=' + unit_id, '_blank');
@@ -129,4 +129,4 @@ if (isset($_GET['mid'])) {
         }
     </script>
 
-<?php include('../footer.php'); ?>
+    <?php include('../footer.php'); ?>
