@@ -49,13 +49,11 @@ if (isset($_POST['txtRName'])) {
                 $url = WEB_URL . 'rent/rentlist.php?m=add';
                 header("Location: $url");
             } else {
-                echo("Error description: " . mysqli_error($link));
                 $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
                 error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
                 exit();
             }
         } else {
-            echo("Error description: " . mysqli_error($link));
             $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
             error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
             exit();
@@ -142,7 +140,6 @@ function NewGuid() {
 }
 ?>
 <!-- Content Header (Page header) -->
-
 <section class="content-header">
     <h1><?php echo $_data['add_new_renter']; ?></h1>
     <ol class="breadcrumb">

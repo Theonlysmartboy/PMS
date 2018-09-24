@@ -130,21 +130,21 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
                                                                 }
                                                                 ?><br/>
                                                                 <b><?php echo $_data['add_new_form_field_text_10']; ?> :</b> <?php
-                                                            if ($currency_position == 'left') {
-                                                                echo $global_currency . $row['r_rent_pm'];
-                                                            } else {
-                                                                echo $row['r_rent_pm'] . $global_currency;
-                                                            }
+                                                                if ($currency_position == 'left') {
+                                                                    echo $global_currency . $row['r_rent_pm'];
+                                                                } else {
+                                                                    echo $row['r_rent_pm'] . $global_currency;
+                                                                }
                                                                 ?><br/>
                                                                 <b><?php echo $_data['add_new_form_field_text_11']; ?> :</b> <?php echo $row['r_date']; ?><br/>
                                                                 <b><?php echo $_data['add_new_form_field_text_14']; ?> :</b>
-    <?php
-    if ($row['r_status'] == '1') {
-        echo $_data['add_new_form_field_text_16'];
-    } else {
-        echo $_data['add_new_form_field_text_17'];
-    }
-    ?>
+                                                                <?php
+                                                                if ($row['r_status'] == '1') {
+                                                                    echo $_data['add_new_form_field_text_16'];
+                                                                } else {
+                                                                    echo $_data['add_new_form_field_text_17'];
+                                                                }
+                                                                ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -153,7 +153,7 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
                                             </div>
                                         </div></td>
                                 </tr>
-<?php } mysqli_close($link); ?>
+                            <?php } mysqli_close($link); ?>
                         </tbody>
                     </table>
                 </div>
@@ -179,4 +179,4 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
             }, 3000);
         });
     </script>
-<?php include('../footer.php'); ?>
+    <?php include('../footer.php'); ?>

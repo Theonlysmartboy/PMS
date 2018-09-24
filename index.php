@@ -45,15 +45,23 @@ if (isset($_POST['username']) && $_POST['username'] != '' && isset($_POST['passw
         $_SESSION['login_type'] = $_POST['ddlLoginType'];
 
         if ($_POST['ddlLoginType'] == '1' || $_POST['ddlLoginType'] == '5') {
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
+            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '2') {
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
+            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: o_dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '3') {
+            $log_message= 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
+            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: e_dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '4') {
+            $log_message= 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
+            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: t_dashboard.php");
             die();
         }
@@ -133,7 +141,7 @@ function make_safe($variable) {
                                                     while ($row_branch = mysqli_fetch_array($result_branch)) {
                                                         ?>
                                                         <option value="<?php echo $row_branch['branch_id']; ?>"><?php echo $row_branch['branch_name']; ?></option>
-<?php } ?>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                             <div class="form-group">
