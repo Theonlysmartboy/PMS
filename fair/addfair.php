@@ -159,6 +159,26 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                                         ?> value="<?php echo $row_month['m_id']; ?>"><?php echo $row_month['month_name']; ?></option><?php } ?>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="txtWaterBill"><?php echo $_data['add_new_form_field_text_8']; ?> :</label>
+                                <input type="text" name="txtWaterBill" id="txtWaterBill" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtElectricityBill"><?php echo $_data['add_new_form_field_text_9']; ?> :</label>
+                                <input type="text" name="txtElectricityBill" id="txtElectricityBill" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtGasBill"><?php echo $_data['add_new_form_field_text_10']; ?> :</label>
+                                <input type="text" name="txtGasBill" id="txtGasBill" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSecurityBill"><?php echo $_data['add_new_form_field_text_11']; ?> :</label>
+                                <input type="text" name="txtSecurityBill" id="txtSecurityBill" class="form-control">
+                            </div>
+                             <div class="form-group">
+                                <label for="txtUtilityBill"><?php echo $_data['add_new_form_field_text_12']; ?> :</label>
+                                <input type="text" name="txtUtilityBill" id="txtUtilityBill" class="form-control">
+                            </div>
                             <div class="form-group pull-right">
                                 <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
                             </div>

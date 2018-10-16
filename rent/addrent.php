@@ -50,12 +50,12 @@ if (isset($_POST['txtRName'])) {
                 header("Location: $url");
             } else {
                 $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
-                error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
+                error_log($error . "Date:" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
                 exit();
             }
         } else {
             $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
-            error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
+            error_log($error . "Date:" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
             exit();
         }
     } else {

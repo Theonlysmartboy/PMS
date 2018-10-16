@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+date_default_timezone_set('Africa/Nairobi');
 define('DIR_APPLICATION', str_replace('\'', '/', realpath(dirname(__FILE__))) . '/');
 if (!file_exists("config.php")) {
     header("Location: install/index.php");
@@ -44,25 +45,30 @@ if (isset($_POST['username']) && $_POST['username'] != '' && isset($_POST['passw
 
         $_SESSION['login_type'] = $_POST['ddlLoginType'];
 
-        if ($_POST['ddlLoginType'] == '1' || $_POST['ddlLoginType'] == '5') {
-            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
-            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
+        if ($_POST['ddlLoginType'] == '1') {
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ' As: Admin';
+            error_log($log_message . " On: " . date("l jS \of F, Y, h:i:s A P") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '2') {
-            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
-            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ' As: Owner';
+            error_log($log_message . " On: " . date("l jS \of F, Y, h:i:s A P") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: o_dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '3') {
-            $log_message= 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
-            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ' As: Employee';
+            error_log($log_message . "On:" . date("l jS \of F, Y, h:i:s A P") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: e_dashboard.php");
             die();
         } else if ($_POST['ddlLoginType'] == '4') {
-            $log_message= 'Logged in user: ' . $_SESSION['objLogin']['name'] . ': ' . time();
-            error_log($log_message . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ' As: Tenant';
+            error_log($log_message . "On:" . date("l jS \of F, Y, h:i:s A P") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
             header("Location: t_dashboard.php");
+            die();
+        } else if ($_POST['ddlLoginType'] == '5') {
+            $log_message = 'Logged in user: ' . $_SESSION['objLogin']['name'] . ' As: Super Admin';
+            error_log($log_message . " On: " . date("l jS \of F, Y, h:i:s A P") . "\n", 3, ROOT_PATH . 'Logs/logins.log');
+            header("Location: dashboard.php");
             die();
         }
     } else {

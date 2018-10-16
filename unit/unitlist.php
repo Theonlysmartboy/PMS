@@ -42,11 +42,11 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
             <div id="me" class="alert alert-danger alert-dismissable" style="display:<?php echo $delinfo; ?>">
                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
                 <h4><i class="icon fa fa-ban"></i> <?php echo $_data['delete_text']; ?>!</h4>
-<?php echo $_data['delete_unit_information']; ?></div>
+                <?php echo $_data['delete_unit_information']; ?></div>
             <div id="you" class="alert alert-success alert-dismissable" style="display:<?php echo $addinfo; ?>">
                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
                 <h4><i class="icon fa fa-check"></i><?php echo $_data['success']; ?> !</h4>
-<?php echo $msg; ?> </div>
+                <?php echo $msg; ?> </div>
             <div align="right" style="margin-bottom:1%;"> <a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL; ?>unit/addunit.php" data-original-title="<?php echo $_data['add_unit']; ?>"><i class="fa fa-plus"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL; ?>dashboard.php" data-original-title="<?php echo $_data['home_breadcam']; ?>"><i class="fa fa-dashboard"></i></a> </div>
             <div class="box box-info">
                 <div class="box-header">
@@ -59,20 +59,20 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
                             <tr>
                                 <th><?php echo $_data['floor_no']; ?></th>
                                 <th><?php echo $_data['unit_no']; ?></th>
-                                <th><?php echo "Size"; ?></th>
+                                <th><?php echo "Wing"; ?></th>
                                 <th><?php echo "Status"; ?></th>
                                 <th><?php echo $_data['action_text']; ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $result = mysqli_query($link, "Select f.floor_no,u.unit_no,size,status,u.uid from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no where u.branch_id = " . (int) $_SESSION['objLogin']['branch_id'] . " order by u.unit_no ASC");
+                            $result = mysqli_query($link, "Select f.floor_no,u.unit_no, w.w_name,status,u.uid from tbl_add_unit u inner join tbl_add_floor f on f.fid = u.floor_no INNER JOIN tbl_add_wing w on w.id = u.wing_no where u.branch_id =" . (int) $_SESSION['objLogin']['branch_id'] . " order by u.unit_no ASC");
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
                                     <td><?php echo $row['floor_no']; ?></td>
                                     <td><?php echo $row['unit_no']; ?></td>
-                                    <td><?php echo $row['size']; ?></td>
+                                    <td><?php echo $row['w_name']; ?></td>
                                     <td><?php
                                         if ($row['status'] == 1) {
                                             echo "<p class='txt-success'>Rented</p>";
@@ -105,13 +105,13 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
                                             </div>
                                         </div></td>
                                 </tr>
-<?php } mysqli_close($link); ?>
+                            <?php } mysqli_close($link); ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th><?php echo $_data['floor_no']; ?></th>
                                 <th><?php echo $_data['unit_no']; ?></th>
-                                <th><?php echo "Size"; ?></th>
+                                <th><?php echo "Wing"; ?></th>
                                 <th><?php echo "Status"; ?></th>
                                 <th><?php echo $_data['action_text']; ?></th>
                             </tr>
@@ -140,4 +140,4 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
             }, 3000);
         });
     </script>
-<?php include('../footer.php'); ?>
+    <?php include('../footer.php'); ?>
