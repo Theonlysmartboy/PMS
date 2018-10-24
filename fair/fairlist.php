@@ -184,7 +184,7 @@ if (isset($_GET['m']) && $_GET['m'] == 'up') {
     <!-- /.row -->
     <script type="text/javascript">
         function deleteFair(Id) {
-            var iAnswer = confirm("Are you sure you want to delete this Fair ?");
+            var iAnswer = confirm("Are you sure you want to delete this Innformation ?");
             if (iAnswer) {
                 window.location = '<?php echo WEB_URL; ?>fair/fairlist.php?id=' + Id;
             }

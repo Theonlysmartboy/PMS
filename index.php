@@ -110,9 +110,7 @@ function make_safe($variable) {
                         <br/>
                         <div class="row text-center ">
                             <div class="col-md-12"><br/>
-                                <span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <img src="<?php echo WEB_URL; ?>assets/img/vidiclogo.png" alt="VIDIC" style="height:150px; width: 150px;"/>
+                                <span> <img src="<?php echo WEB_URL; ?>assets/img/vidiclogo.png" alt="VIDIC" style="height:150px; width: 150px;"/>
                                 </span> <span style="font-size:20px; font-family: serif; font-weight: bold;">Property Management System</span></div>
                         </div>
                         <br/>
@@ -120,7 +118,7 @@ function make_safe($variable) {
                             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
                                 <div style="margin-bottom:8px;padding-top:2px;width:100%;height:25px;background:#E52740;color:#fff; display:<?php echo $msg; ?>" align="center">Wrong Credentials provided</div>
                                 <div class="panel panel-default" id="loginBox">
-                                    <div class="panel-heading"> <strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Enter Login Details </strong> </div>
+                                    <div class="panel-heading text-center"> <strong> Login </strong> </div>
                                     <div class="panel-body">
                                         <form onSubmit="return validationForm();" role="form" id="form" method="post">
                                             <br />
@@ -162,6 +160,7 @@ function make_safe($variable) {
                                 </div>
                             </div>
                         </div>
+                        <?php include('footer.php'); ?>
                     </div>
                     <script type="text/javascript">
                         function validationForm() {
