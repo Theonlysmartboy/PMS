@@ -40,7 +40,6 @@ if (isset($_POST['txtRent'])) {
             $url = WEB_URL . 'fair/fairlist.php?m=add';
             header("Location: $url");
         } else {
-            echo"Unable to insert records check log files or cotact admin for more information";
             $error = 'Add fair Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
             error_log($error . "Date::" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
             exit();
@@ -175,7 +174,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                                 <label for="txtSecurityBill"><?php echo $_data['add_new_form_field_text_11']; ?> :</label>
                                 <input type="text" name="txtSecurityBill" id="txtSecurityBill" class="form-control">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="txtUtilityBill"><?php echo $_data['add_new_form_field_text_12']; ?> :</label>
                                 <input type="text" name="txtUtilityBill" id="txtUtilityBill" class="form-control">
                             </div>
@@ -195,39 +194,39 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     <!-- /.row -->
     <script type="text/javascript">
         function validateMe() {
-            if ($("#ddlFloorNo").val() == '') {
+            if ($("#ddlFloorNo").val() === '') {
                 alert("Floor Required !!!");
                 $("#ddlFloorNo").focus();
                 return false;
-            } else if ($("#ddlUnitNo").val() == '') {
+            } else if ($("#ddlUnitNo").val() === '') {
                 alert("Unit Required !!!");
                 $("#ddlUnitNo").focus();
                 return false;
-            } else if ($("#ddlMonth").val() == '') {
+            } else if ($("#ddlMonth").val() === '') {
                 alert("Month Required !!!");
                 $("#ddlMonth").focus();
                 return false;
-            } else if ($("#txtWaterBill").val() == '') {
+            } else if ($("#txtWaterBill").val() === '') {
                 alert("Water Bill Required !!!");
                 $("#txtWaterBill").focus();
                 return false;
-            } else if ($("#txtElectricBill").val() == '') {
+            } else if ($("#txtElectricBill").val() === '') {
                 alert("Electric Bill Required !!!");
                 $("#txtElectricBill").focus();
                 return false;
-            } else if ($("#txtGasBill").val() == '') {
+            } else if ($("#txtGasBill").val() === '') {
                 alert("Gas Bill Required !!!");
                 $("#txtGasBill").focus();
                 return false;
-            } else if ($("#txtSecurityBill").val() == '') {
+            } else if ($("#txtSecurityBill").val() === '') {
                 alert("Security Bill Required !!!");
                 $("#txtSecurityBill").focus();
                 return false;
-            } else if ($("#txtUtilityBill").val() == '') {
+            } else if ($("#txtUtilityBill").val() === '') {
                 alert("Utility Bill Required !!!");
                 $("#txtUtilityBill").focus();
                 return false;
-            } else if ($("#txtIssueDate").val() == '') {
+            } else if ($("#txtIssueDate").val() === '') {
                 alert("Issue Date Required !!!");
                 $("#txtIssueDate").focus();
                 return false;

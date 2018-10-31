@@ -32,46 +32,46 @@ $image_rnt = WEB_URL . 'img/no_image.jpg';
 $img_track = '';
 $password = 'owner@vidic%Pms';
 $r_gone_date = '';
-if (isset($_POST['txtRName'])) {
+if (isset( $_POST['txtRName'])) {
     if (isset($_POST['hdn']) && $_POST['hdn'] == '0') {
-        $r_password = $_POST['txtPassword'];
+        $r_password = mysqli_real_escape_string($link, $_POST['txtPassword']);
         $image_url = uploadImage();
-        if (isset($_POST['chkRStatus'])) {
+        if (isset( $_POST['chkRStatus'])) {
             $r_status = 1;
         }
         $sql = "INSERT INTO tbl_add_rent(r_name,r_email,r_contact,r_address,r_nid,r_floor_no,r_unit_no,r_advance,r_rent_pm,r_date,r_month,r_year,r_gone_date,r_password,r_status,image,branch_id) values('$_POST[txtRName]','$_POST[txtREmail]','$_POST[txtRContact]','$_POST[txtRAddress]','$_POST[txtRentedNID]','$_POST[ddlFloorNo]','$_POST[ddlUnitNo]','$_POST[txtRAdvance]','$_POST[txtRentPerMonth]','$_POST[txtRDate]','$_POST[ddlMonth]','$_POST[ddlYear]','$_POST[txtRExpiry]','$r_password','$r_status','$image_url','" . $_SESSION['objLogin']['branch_id'] . "')";
         if (mysqli_query($link, $sql)) {
             //update unit status
-            $sqlx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) $_POST['ddlFloorNo'] . "' and uid = '" . (int) $_POST['ddlUnitNo'] . "'";
+            $sqlx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) mysqli_real_escape_string($link, $_POST['ddlFloorNo']) . "' and uid = '" . (int) mysqli_real_escape_string($link, $_POST['ddlUnitNo']) . "'";
             if (mysqli_query($link, $sqlx)) {
                 ////////////////////////
                 mysqli_close($link);
                 $url = WEB_URL . 'rent/rentlist.php?m=add';
                 header("Location: $url");
             } else {
-                $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
+                $error = 'Addd rent Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
                 error_log($error . "Date:" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
                 exit();
             }
         } else {
-            $error = 'Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
+            $error = 'Add rent Error No: ' . mysqli_errno($link) . ': ' . mysqli_error($link);
             error_log($error . "Date:" . date("l jS \of F, Y, h:i:s A") . "\n", 3, ROOT_PATH . 'Logs/sql-errors.log');
             exit();
         }
     } else {
         $image_url = uploadImage();
         if ($image_url == '') {
-            $image_url = $_POST['img_exist'];
+            $image_url = mysqli_real_escape_string($link, $_POST['img_exist']);
         }
         if (isset($_POST['chkRStatus'])) {
             $r_status = 1;
         }
-        $sql = "UPDATE `tbl_add_rent` SET `r_name`='" . $_POST['txtRName'] . "',`r_email`='" . $_POST['txtREmail'] . "',`r_password`='" . $_POST['txtPassword'] . "',`r_contact`='" . $_POST['txtRContact'] . "',`r_address`='" . $_POST['txtRAddress'] . "',`r_nid`='" . $_POST['txtRentedNID'] . "',`r_floor_no`='" . $_POST['ddlFloorNo'] . "',`r_unit_no`='" . $_POST['ddlUnitNo'] . "',`r_advance`='" . $_POST['txtRAdvance'] . "',`r_rent_pm`='" . $_POST['txtRentPerMonth'] . "',`r_date`='" . $_POST['txtRDate'] . "',`r_month`='" . $_POST['ddlMonth'] . "',`r_year`='" . $_POST['ddlYear'] . "',`r_status`='" . $r_status . "',`image`='" . $image_url . "' WHERE rid='" . $_GET['id'] . "'";
+        $sql = "UPDATE `tbl_add_rent` SET `r_name`='" . mysqli_real_escape_string($link, $_POST['txtRName']) . "',`r_email`='" . mysqli_real_escape_string($link, $_POST['txtREmail']) . "',`r_password`='" . mysqli_real_escape_string($link, $_POST['txtPassword']) . "',`r_contact`='" . mysqli_real_escape_string($link, $_POST['txtRContact']) . "',`r_address`='" . mysqli_real_escape_string($link, $_POST['txtRAddress']) . "',`r_nid`='" . mysqli_real_escape_string($link, $_POST['txtRentedNID']) . "',`r_floor_no`='" . mysqli_real_escape_string($link, $_POST['ddlFloorNo']) . "',`r_unit_no`='" . mysqli_real_escape_string($link, $_POST['ddlUnitNo']) . "',`r_advance`='" . mysqli_real_escape_string($link, $_POST['txtRAdvance']) . "',`r_rent_pm`='" . mysqli_real_escape_string($link, $_POST['txtRentPerMonth']) . "',`r_date`='" . mysqli_real_escape_string($link, $_POST['txtRDate']) . "',`r_month`='" . mysqli_real_escape_string($link, $_POST['ddlMonth']) . "',`r_year`='" . mysqli_real_escape_string($link, $_POST['ddlYear']) . "',`r_status`='" . $r_status . "',`image`='" . $image_url . "' WHERE rid='" . $_GET['id'] . "'";
         mysqli_query($link, $sql);
         //update unit status
-        $sqlx = "UPDATE `tbl_add_unit` set status = 0 where floor_no = '" . (int) $_POST['hdnFloor'] . "' and uid = '" . (int) $_POST['hdnUnit'] . "'";
+        $sqlx = "UPDATE `tbl_add_unit` set status = 0 where floor_no = '" . (int) mysqli_real_escape_string($link, $_POST['hdnFloor']) . "' and uid = '" . (int) mysqli_real_escape_string($link, $_POST['hdnUnit']) . "'";
         mysqli_query($link, $sqlx);
-        $sqlxx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) $_POST['ddlFloorNo'] . "' and uid = '" . (int) $_POST['ddlUnitNo'] . "'";
+        $sqlxx = "UPDATE `tbl_add_unit` set status = 1 where floor_no = '" . (int) mysqli_real_escape_string($link, $_POST['ddlFloorNo']) . "' and uid = '" . (int) mysqli_real_escape_string($link, $_POST['ddlUnitNo']) . "'";
         mysqli_query($link, $sqlxx);
         ///////////////////////////////////////////
         $url = WEB_URL . 'rent/rentlist.php?m=up';

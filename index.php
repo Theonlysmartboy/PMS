@@ -164,7 +164,7 @@ function make_safe($variable) {
                     </div>
                     <script type="text/javascript">
                         function validationForm() {
-                            if ($("#username").val() == '') {
+                            if ($("#username").val() === '') {
                                 alert("Email Required !!!");
                                 $("#username").focus();
                                 return false;
@@ -172,11 +172,11 @@ function make_safe($variable) {
                                 alert("Valid Email Required !!!");
                                 $("#username").focus();
                                 return false;
-                            } else if ($("#password").val() == '') {
+                            } else if ($("#password").val() === '') {
                                 alert("Password Required !!!");
                                 $("#password").focus();
                                 return false;
-                            } else if ($("#ddlLoginType").val() == '') {
+                            } else if ($("#ddlLoginType").val() === '') {
                                 alert("Select User Type !!!");
                                 return false;
                             } else {
@@ -189,8 +189,8 @@ function make_safe($variable) {
                         }
 
                         function mewhat(val) {
-                            if (val != '') {
-                                if (val == '5') {
+                            if (val !== '') {
+                                if (val === '5') {
                                     $("#x_branch").show();
                                 } else {
                                     $("#x_branch").hide();
