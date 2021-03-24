@@ -27,9 +27,12 @@ if(isset($_GET['m']) && $_GET['m'] == 'up'){
 <!-- Content Header (Page header) -->
 
 <section class="content-header">
-  <h1> <?php echo $_data['text_14'];?> </h1>
+  <h1> <?php echo $_data['text_1'];?> </h1>
   <ol class="breadcrumb">
     <li><a href="<?php echo WEB_URL?>/dashboard.php"><i class="fa fa-dashboard"></i> <?php echo $_data['text_12'];?></a></li>
-    <li class="active"><?php echo $_data['text_14'];?></li>
+    <li class="active"><?php echo $_data['text_1'];?></li>
   </ol>
 </section>
+<section class="content">
+
+ <?php include('../footer.php'); ?>

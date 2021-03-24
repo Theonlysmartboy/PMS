@@ -102,83 +102,11 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                     </div>
                     <input type="hidden" name="hdnSpid" value="<?php echo $hval; ?>"/>
                 </form>
-                <h4 style="text-align:center; color:red;"><?php echo $_data['text_5']; ?></h4>
-
-                <!-- /.box-body -->
+              <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>
     </div>
-    <div class="box-body">
-        <table class="table sakotable table-bordered table-striped dt-responsive">
-            <thead>
-                <tr>
-                    <th><?php echo $_data['text_5']; ?></th>
-                    <th><?php echo $_data['text_7']; ?></th>
-                    <th><?php echo $_data['text_8']; ?></th>
-                    <th><?php echo $_data['text_10']; ?></th>
-                    <th><?php echo $_data['text_12']; ?></th>
-                    <th><?php echo $_data['text_13']; ?></th>
-                    <th><?php echo $_data['text_14']; ?></th>
-                    <th><?php echo $_data['action_text']; ?></th>
-                </tr>
-            </thead>
-            <tbody>
-<?php
-$result = mysqli_query($link, "Select *,bt.bill_type as bt_type,m.month_name,y.xyear,bt.bt_id from tbl_add_bill b inner join tbl_add_bill_type bt on bt.bt_id = b.bill_type inner join tbl_add_month_setup m on m.m_id = b.bill_month inner join tbl_add_year_setup y on y.y_id = b.bill_year where b.branch_id = " . (int) $_SESSION['objLogin']['branch_id'] . " order by b.bill_id asc");
-while ($row = mysqli_fetch_array($result)) {
-    ?>
-                    <tr>
-                        <td><?php echo $row['bt_type']; ?></td>
-                        <td><?php echo $row['bill_date']; ?></td>
-                        <td><?php echo $row['month_name']; ?></td>
-                        <td><?php echo $row['xyear']; ?></td>
-    <?php if ($currency_position == 'left') { ?>
-                            <td><?php echo $global_currency . $row['total_amount']; ?></td>
-                        <?php } else { ?>
-                            <td><?php echo $row['total_amount'] . $global_currency; ?></h3>
-                        <?php } ?>
-                        <td><?php echo $row['deposit_bank_name']; ?></td>
-                        <td><?php echo $row['bill_details']; ?></td>
-                        <td><a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_<?php echo $row['bill_id']; ?>').modal('show');" data-original-title="<?php echo $_data['view_text']; ?>"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="<?php echo WEB_URL; ?>bill/add_bill.php?id=<?php echo $row['bill_id']; ?>" data-original-title="<?php echo $_data['edit_text']; ?>"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteBill(<?php echo $row['bill_id']; ?>);" href="javascript:;" data-original-title="<?php echo $_data['delete_text']; ?>"><i class="fa fa-trash-o"></i></a>
-                            <div id="nurse_view_<?php echo $row['bill_id']; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header orange_header">
-                                            <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
-                                            <h3 class="modal-title"><?php echo $_data['text_1_1']; ?></h3>
-                                        </div>
-                                        <div class="modal-body model_view" align="center">&nbsp;
-                                          <div><!--<img style="width:200px;height:200px;border-radius:200px;" src="<?php //echo $image;   ?>" />--></div>
-                                            <div class="model_title"><?php echo $row['bill_type']; ?></div>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h3 style="text-decoration:underline;"><?php echo $_data['details_information']; ?></h3>
-                                            <div class="row">
-                                                <div class="col-xs-12"> <b><?php echo $_data['text_5']; ?> :</b> <?php echo $row['bt_type']; ?><br/>
-                                                    <b><?php echo $_data['text_7']; ?> :</b> <?php echo $row['bill_date']; ?><br/>
-                                                    <b><?php echo $_data['text_8']; ?> :</b> <?php echo $row['month_name']; ?><br/>
-                                                    <b><?php echo $_data['text_10']; ?> :</b> <?php echo $row['xyear']; ?><br/>
-                                                    <b><?php echo $_data['text_12']; ?> :</b> <?php if ($currency_position == 'left') {
-                            echo $global_currency . $row['total_amount'];
-                        } else {
-                            echo $row['total_amount'] . $global_currency;
-                        } ?><br/>
-                                                    <b><?php echo $_data['text_13']; ?> :</b> <?php echo $row['deposit_bank_name']; ?><br/>
-                                                    <b><?php echo $_data['text_14']; ?> :</b> <?php echo $row['bill_details']; ?><br/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                            </div></td>
-                    </tr>
-<?php } mysqli_close($link); ?>
-            </tbody>
-        </table>
-    </div>
-    <!-- /.box-body -->
     <!-- /.row -->
     <script type="text/javascript">
         function validateMe() {
