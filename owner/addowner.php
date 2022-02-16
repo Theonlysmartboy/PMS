@@ -132,7 +132,8 @@ function NewGuid() {
 <section class="content-header">
     <h1><?php echo $_data['add_new_owner']; ?></h1>
     <ol class="breadcrumb">
-        <li><a href="<?php echo WEB_URL ?>/dashboard.php"><i class="fa fa-dashboard"></i><?php echo $_data['home_breadcam']; ?></a></li>
+        <li><a href="<?php echo WEB_URL ?>/dashboard.php"><i
+                    class="fa fa-dashboard"></i><?php echo $_data['home_breadcam']; ?></a></li>
         <li class="active"><?php echo $_data['add_new_owner_information_breadcam']; ?></li>
         <li class="active"><?php echo $_data['add_new_owner_breadcam']; ?></li>
     </ol>
@@ -142,31 +143,39 @@ function NewGuid() {
     <!-- Full Width boxes (Stat box) -->
     <div class="row">
         <div class="col-md-12">
-            <div align="right" style="margin-bottom:1%;"> <a class="btn btn-primary" title="" data-toggle="tooltip" href="<?php echo WEB_URL; ?>owner/ownerlist.php" data-original-title="<?php echo $_data['back_text']; ?>"><i class="fa fa-reply"></i></a> </div>
+            <div align="right" style="margin-bottom:1%;"> <a class="btn btn-primary" title="" data-toggle="tooltip"
+                    href="<?php echo WEB_URL; ?>owner/ownerlist.php"
+                    data-original-title="<?php echo $_data['back_text']; ?>"><i class="fa fa-reply"></i></a> </div>
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title"><?php echo $_data['add_new_owner_entry_form']; ?></h3>
-                    <form onSubmit="return validateMe();" action="<?php echo $form_url; ?>" method="post" enctype="multipart/form-data">
+                    <form onSubmit="return validateMe();" action="<?php echo $form_url; ?>" method="post"
+                        enctype="multipart/form-data">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="txtOwnerName"><?php echo $_data['add_new_form_field_text_1']; ?> :</label>
                                 <input type="text" name="txtOwnerName" id="txtOwnerName" class="form-control" />
-                            </div> 
+                            </div>
                             <div class="form-group">
                                 <label for="txtOwnerEmail"><?php echo $_data['add_new_form_field_text_2']; ?> :</label>
                                 <input type="text" name="txtOwnerEmail" id="txtOwnerEmail" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label for="txtOwnerContact"><?php echo $_data['add_new_form_field_text_4']; ?> :</label>
+                                <label for="txtOwnerContact"><?php echo $_data['add_new_form_field_text_4']; ?>
+                                    :</label>
                                 <input type="text" name="txtOwnerContact" id="txtOwnerContact" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label for="txtOwnerPreAddress"><?php echo $_data['add_new_form_field_text_5']; ?> :</label>
-                                <input type="text" name="txtOwnerPreAddress" id="txtOwnerPreAddress" class="form-control" />
-                            </div> 
+                                <label for="txtOwnerPreAddress"><?php echo $_data['add_new_form_field_text_5']; ?>
+                                    :</label>
+                                <input type="text" name="txtOwnerPreAddress" id="txtOwnerPreAddress"
+                                    class="form-control" />
+                            </div>
                             <div class="form-group">
-                                <label for="txtOwnerPerAddress"><?php echo $_data['add_new_form_field_text_6']; ?> :</label>
-                                <input type="text" name="txtOwnerPerAddress" id="txtOwnerPerAddress" class="form-control" />
+                                <label for="txtOwnerPerAddress"><?php echo $_data['add_new_form_field_text_6']; ?>
+                                    :</label>
+                                <input type="text" name="txtOwnerPerAddress" id="txtOwnerPerAddress"
+                                    class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label for="txtOwnerNID"><?php echo $_data['add_new_form_field_text_7']; ?> :</label>
@@ -174,7 +183,8 @@ function NewGuid() {
                             </div>
                             <div class="form-group">
                                 <label for="txtPassword"><?php echo $_data['add_new_form_field_text_3']; ?> :</label>
-                                <input type="password" name="txtPassword" id="txtPassword" class="form-control" value="<?php echo $password; ?>" required="required" readonly="readonly" />
+                                <input type="password" name="txtPassword" id="txtPassword" class="form-control"
+                                    value="<?php echo $password; ?>" required="required" readonly="readonly" />
                             </div>
                             <div class="form-group">
                                 <label for="ChkOwnerUnit"><?php echo $_data['add_new_form_field_text_8']; ?> : </label>
@@ -182,18 +192,20 @@ function NewGuid() {
                                 $result_unit = mysqli_query($link, "Select * from tbl_add_unit where branch_id = " . (int) $_SESSION['objLogin']['branch_id'] . " order by uid asc");
                                 while ($row_unit = mysqli_fetch_array($result_unit)) {
                                     ?>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form" name="ChkOwnerUnit" value="<?php echo $row_unit['uid']; ?>" /><?php echo $row_unit['unit_no']; ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form" name="ChkOwnerUnit"
+                                    value="<?php echo $row_unit['uid']; ?>" /><?php echo $row_unit['unit_no']; ?>
                                 <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="img_exist"><?php echo $_data['add_new_form_field_text_13']; ?> </label>
-                                <input type="file" accept="image/png, image/jpeg" name="img_exist" id="img_exist"/>
-                                                       </div>
+                                <input type="file" accept="image/png, image/jpeg" name="img_exist" id="img_exist" />
+                            </div>
                             <div class="form-group pull-right">
-                                <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $button_text; ?>"/>
+                                <input type="submit" name="submit" class="btn btn-primary"
+                                    value="<?php echo $button_text; ?>" />
                             </div>
                         </div>
-                        <input type="hidden" value="<?php echo $hdnid; ?>" name="hdn"/>
+                        <input type="hidden" value="<?php echo $hdnid; ?>" name="hdn" />
                     </form>
                 </div>
                 <!-- /.box-body -->
